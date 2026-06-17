@@ -1,0 +1,32 @@
+{
+  "name": "cookie-station",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "oxlint . && eslint .",
+    "lint:fix": "oxlint --fix . && eslint --fix .",
+    "prepare": "lefthook install"
+  },
+  "dependencies": {
+    "@shopify/storefront-api-client": "1.0.10",
+    "nuxt": "4.4.8"
+  },
+  "devDependencies": {
+    "@types/node": "25.9.3",
+    "@vue/eslint-config-typescript": "14.8.0",
+    "eslint": "10.5.0",
+    "eslint-plugin-vue": "10.9.2",
+    "lefthook": "2.1.9",
+    "oxlint": "1.70.0",
+    "typescript": "6.0.3",
+    "vue-tsc": "3.3.5"
+  },
+  "trustedDependencies": [
+    "@parcel/watcher"
+  ]
+}
