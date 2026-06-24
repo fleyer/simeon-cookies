@@ -22,18 +22,20 @@ Avoid: pastel pink/brown clichés, cartoon bakery aesthetics, generic DTC startu
 
 ## Color Palette
 
-| Role | Name | Value |
-|------|------|-------|
-| Background | Parchment | `#F5EFE0` |
-| Surface (cards, panels) | Cream | `#FAF7F2` |
-| Primary text | Espresso | `#1A0F0A` |
-| Accent (CTAs, highlights) | Burnt Sienna | `#C4622D` |
-| Secondary | Warm Sand | `#D4BA8C` |
-| Border / divider | Biscuit | `#E2D5BF` |
-| Error | Terracotta | `#B04020` |
-| Success | Sage | `#4A7C59` |
+| Role | Token | Name | Value |
+|------|-------|------|-------|
+| Background | `--ui-bg` | Cream | `#fbf2e9` |
+| Primary (CTAs, highlights) | `primary` | Peach | `#e9baa3` |
+| Secondary (headings, overlays) | `secondary` | Ink | `#1d2b3b` |
+| Neutral chrome | `neutral` | Stone | Tailwind stone scale |
+| Error | `error` | — | Tailwind red (default) |
+| Success | `success` | — | Tailwind green (default) |
 
-The dominant pair is **Parchment + Espresso**, with Burnt Sienna used sparingly for action items and focus states. Never use more than two accent colors on a single screen.
+### Theme implementation
+
+Colors are registered in `assets/css/main.css` as `@theme static` custom scales (`peach` and `ink`) and wired up in `app.config.ts`. `--ui-primary` is pinned to shade 400 of the peach scale (the exact `#e9baa3` value). The background override (`--ui-bg: #fbf2e9`) is set in `:root`.
+
+The dominant pair is **Cream + Ink**, with Peach used for action items and focus states. Never use more than two accent colors on a single screen.
 
 ---
 

@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  /* Primary — peach (#e9baa3 = shade 400) */
+  --color-peach-50: #fef9f6;
+  --color-peach-100: #fdf2ec;
+  --color-peach-200: #fae4d4;
+  --color-peach-300: #f2c9ae;
+  --color-peach-400: #e9baa3;
+  --color-peach-500: #d99980;
+  --color-peach-600: #c47458;
+  --color-peach-700: #a35339;
+  --color-peach-800: #7f3b23;
+  --color-peach-900: #5d2b17;
+  --color-peach-950: #32140b;
+
+  /* Secondary — ink (#1d2b3b = shade 800) */
+  --color-ink-50: #edf3f7;
+  --color-ink-100: #d8e7f0;
+  --color-ink-200: #b1cfe2;
+  --color-ink-300: #7faecf;
+  --color-ink-400: #5189b4;
+  --color-ink-500: #366997;
+  --color-ink-600: #285179;
+  --color-ink-700: #1f3e5d;
+  --color-ink-800: #1d2b3b;
+  --color-ink-900: #131d28;
+  --color-ink-950: #0b1018;
+}
+
+:root {
+  /* Pin primary to the exact brand peach shade */
+  --ui-primary: var(--ui-color-primary-400);
+  /* Warm cream background */
+  --ui-bg: #fbf2e9;
+}

@@ -1,6 +1,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   devtools: { enabled: true },
+  modules: ['@nuxt/ui', '@nuxt/image'],
+  css: ['~/assets/css/main.css'],
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
   },
