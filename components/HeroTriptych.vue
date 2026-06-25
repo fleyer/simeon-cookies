@@ -4,7 +4,7 @@
       <!-- Triptych -->
       <div class="group/triptych flex items-center justify-center gap-3 md:gap-10 px-8 md:px-12 pb-8 md:pb-12 flex-1 min-h-0 overflow-hidden">
         <!-- Left panel — desktop only -->
-        <div class="hidden md:flex aspect-[9/19] h-full max-h-full overflow-hidden flex-shrink-0 py-10">
+        <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
           <NuxtImg
             src="/cookies/hero/cookies-strawberry.jpg"
             alt=""
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Center panel — featured -->
-        <div class="relative aspect-[9/19] h-full max-h-full overflow-hidden cursor-pointer flex-shrink-0">
+        <div class="relative aspect-[9/19] h-full max-h-full overflow-hidden cursor-pointer">
           <NuxtImg
             src="/cookies/hero/cookies-landing.png"
             alt="Cookie signature Simeon"
@@ -74,7 +74,7 @@
         </div>
 
         <!-- Right panel — desktop only -->
-        <div class="hidden md:flex aspect-[9/19] h-full max-h-full overflow-hidden flex-shrink-0 py-10">
+        <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
           <NuxtImg
             src="/cookies/hero/cookie-honey-chocolate.jpg"
             alt=""
