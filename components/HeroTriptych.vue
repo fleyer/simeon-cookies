@@ -4,10 +4,10 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
 </script>
 
 <template>
-  <section class="flex flex-col h-svh bg-[#fbf2e9] pt-40">
+  <section class="flex flex-col h-svh bg-[#fbf2e9] pt-0 sm:pt-40">
     <div class="flex flex-col flex-1 w-full max-w-6xl mx-auto min-h-0">
       <!-- Triptych -->
-      <div class="group/triptych flex items-center justify-center gap-3 md:gap-10 px-8 md:px-12 pb-8 md:pb-12 flex-1 min-h-0">
+      <div class="group/triptych flex items-center justify-center gap-0 md:gap-10 px-0 md:px-12 pb-0 md:pb-8 md:pb-12 flex-1 min-h-0">
         <!-- Left panel — desktop only -->
         <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
           <NuxtImg
@@ -20,7 +20,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         </div>
 
         <!-- Center panel — featured -->
-        <div class="relative aspect-[9/19] h-full max-h-full cursor-pointer">
+        <div class="relative aspect-auto md:aspect-[9/19] h-full max-h-full cursor-pointer">
           <div
             class="hidden sm:flex w-[80%] h-[320px] z-10 pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center shadow-lg absolute overflow-hidden"
             :style="{ opacity: logoOpacity }"
@@ -28,7 +28,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
             <HeroLogo />
           </div>
 
-          <div class="h-full w-full aspect=[9/19] overflow-hidden">
+          <div class="h-full w-full aspect-auto sm:aspect=[9/19] overflow-hidden">
             <NuxtImg
               src="/cookies/hero/cookies-landing.png"
               alt="Cookie signature Simeon"
