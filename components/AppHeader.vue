@@ -7,9 +7,9 @@ const mobileOpen = ref(false)
 const cartCount = ref(0)
 
 const navItems = [
-  { label: 'Nos cookies', to: '/cookies' },
-  { label: 'Nos revendeurs', to: '/revendeurs' },
-  { label: 'À propos', to: '/a-propos', disabled: true },
+  { label: 'Nos cookies', to: '/' },
+  { label: 'Nos revendeurs', to: '/' },
+  { label: 'À propos', to: '/', disabled: true },
 ]
 
 </script>
