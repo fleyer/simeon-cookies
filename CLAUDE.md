@@ -44,6 +44,7 @@ bun run lint       # Run ESLint
 ### Components
 | Component | File | Status | Notes |
 |-----------|------|--------|-------|
+| Header | `components/AppHeader.vue` | ✅ Built | Fixed, sticky; transparent on homepage hero, solid Cream elsewhere; mobile drawer; cart badge placeholder |
 | Hero triptych | `components/HeroTriptych.vue` | ✅ Built | Real images from `public/cookies/hero/`; image source (Shopify vs content module) TBD |
 
 ### Pages
