@@ -47,7 +47,7 @@ jobs:
       - name: Add .nojekyll
         run: touch .output/public/.nojekyll
 
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v7.0.1
         with:
           path: .output/public
 
