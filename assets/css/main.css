@@ -2,6 +2,11 @@
 @import "@nuxt/ui";
 
 @theme static {
+  --font-fraunces: 'Fraunces', serif;
+  --font-lora: 'Lora', serif;
+  --font-instrument-sans: 'Instrument Sans', sans-serif;
+
+
   /* Primary — peach (#e9baa3 = shade 400) */
   --color-peach-50: #fef9f6;
   --color-peach-100: #fdf2ec;

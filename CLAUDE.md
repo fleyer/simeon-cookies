@@ -4,6 +4,7 @@
 
 - **Runtime & Package Manager**: Bun
 - **Framework**: Nuxt 3 (Vue 3) with TypeScript
+- **UI Library**: Nuxt UI v4 (`@nuxt/ui`) — use its components (UButton, UCard, etc.) and Tailwind CSS theming
 - **Rendering**: Static site generation (`nuxt generate`)
 - **Shopify**: `@shopify/storefront-api-client` (framework-agnostic Storefront API client)
   - Use `mock.shop` as the Shopify endpoint during development
@@ -37,6 +38,23 @@ bun run lint       # Run ESLint
     └── workflows/
         └── deploy.yml  # GitHub Pages deployment
 ```
+
+## Implementation Status
+
+### Components
+| Component | File | Status | Notes |
+|-----------|------|--------|-------|
+| Hero triptych | `components/HeroTriptych.vue` | ✅ Built | Real images from `public/cookies/hero/`; image source (Shopify vs content module) TBD |
+
+### Pages
+| Page | File | Status |
+|------|------|--------|
+| Homepage | `pages/index.vue` | ✅ Built — renders HeroTriptych only |
+
+### Fonts
+Loaded via Google Fonts in `nuxt.config.ts` `app.head`. Tailwind classes available: `font-fraunces`, `font-lora`, `font-instrument-sans`.
+
+---
 
 ## Shopify
 
