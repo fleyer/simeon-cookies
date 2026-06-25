@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col h-svh bg-[#fbf2e9] overflow-hidden pt-24">
+  <section class="flex flex-col h-svh bg-[#fbf2e9] overflow-hidden pt-30">
     <div class="flex flex-col flex-1 w-full max-w-6xl mx-auto min-h-0">
       <!-- Triptych -->
       <div class="group/triptych flex items-center justify-center gap-3 md:gap-5 px-8 md:px-12 pb-8 md:pb-12 flex-1 min-h-0 overflow-hidden">

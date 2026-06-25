@@ -55,14 +55,14 @@ On smaller viewports (< 768px), center nav collapses into a hamburger that opens
 ## Visual Design
 
 - **Background**: Cream (`#FAF7F2`) with a 1px bottom border in Biscuit (`#E2D5BF`)
-- **Height**: 64px
+- **Height**: 80px, then shrink when the user scroll down
 - No shadow by default. A subtle shadow appears only after the user scrolls past 80px (scroll-dependent depth cue)
 - The header does **not** use a blur/glass effect — it stays opaque to keep the parchment aesthetic clean
 - On the homepage hero, the header overlays the image with a transparent background that transitions to Cream as the user scrolls
 
 ### Hero Transparency State (Homepage only)
 - At scroll position 0: header background transparent, wordmark and nav in Cream
-- After scrolling 80px: header transitions to Cream background + Biscuit border (300ms transition)
+- After scrolling 80px: header transitions to Cream background + Biscuit border (300ms transition) + the height shrink
 - This only applies on the homepage — all other pages start with the solid Cream header
 
 ---
@@ -73,7 +73,7 @@ On smaller viewports (< 768px), center nav collapses into a hamburger that opens
 |---------|----------|
 | Click wordmark | Navigate to homepage |
 | Click nav link | Navigate to target page |
-| Click cart icon | Open cart drawer |
+| Click cart icon | Navigate to the cart page |
 | Hover nav link | Underline animates in from left |
 | Scroll past 80px (homepage) | Header gains solid background |
 | Item added to cart | Badge count increments; brief scale pulse on the icon (150ms) |
