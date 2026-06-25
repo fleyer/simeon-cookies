@@ -1,8 +1,13 @@
+<script setup lang="ts">
+const scrollY = useScrollY()
+const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
+</script>
+
 <template>
-  <section class="flex flex-col h-svh bg-[#fbf2e9] overflow-hidden pt-30">
+  <section class="flex flex-col h-svh bg-[#fbf2e9] pt-40">
     <div class="flex flex-col flex-1 w-full max-w-6xl mx-auto min-h-0">
       <!-- Triptych -->
-      <div class="group/triptych flex items-center justify-center gap-3 md:gap-10 px-8 md:px-12 pb-8 md:pb-12 flex-1 min-h-0 overflow-hidden">
+      <div class="group/triptych flex items-center justify-center gap-3 md:gap-10 px-8 md:px-12 pb-8 md:pb-12 flex-1 min-h-0">
         <!-- Left panel — desktop only -->
         <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
           <NuxtImg
@@ -15,21 +20,31 @@
         </div>
 
         <!-- Center panel — featured -->
-        <div class="relative aspect-[9/19] h-full max-h-full overflow-hidden cursor-pointer">
-          <NuxtImg
-            src="/cookies/hero/cookies-landing.png"
-            alt="Cookie signature Simeon"
-            format="webp"
-            sizes="100vw md:33vw"
-            loading="eager"
-            class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover/triptych:scale-[1.02]"
-          />
+        <div class="relative aspect-[9/19] h-full max-h-full cursor-pointer">
+          <div
+            class="hidden sm:flex w-[80%] h-[320px] z-10 pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center shadow-lg absolute overflow-hidden"
+            :style="{ opacity: logoOpacity }"
+          >
+            <HeroLogo />
+          </div>
+
+          <div class="h-full w-full aspect=[9/19] overflow-hidden">
+            <NuxtImg
+              src="/cookies/hero/cookies-landing.png"
+              alt="Cookie signature Simeon"
+              format="webp"
+              sizes="100vw md:33vw"
+              loading="eager"
+              class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover/triptych:scale-[1.02]"
+            />
+          </div>
+
 
           <!-- Desktop: title (always) + hover CTA -->
           <div
             class="hidden md:flex absolute inset-0 flex-col items-center justify-end gap-4 pb-20 px-6
                  bg-gradient-to-t from-ink-900/50 group-hover/triptych:from-ink-900/70
-                 transition-all duration-500 ease-out"
+                 transition-all duration-500 ease-out z-1"
           >
             <h2
               class="font-fraunces font-bold text-peach-50 text-center leading-tight text-2xl"

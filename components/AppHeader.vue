@@ -7,9 +7,9 @@ const mobileOpen = ref(false)
 const cartCount = ref(0)
 
 const navItems = [
-  { label: 'Nos cookies', to: '/' },
+  { label: 'Nos cookies !', to: '/', class: 'text-peach-600 rounded-full border-solid border-1' },
   { label: 'Nos revendeurs', to: '/' },
-  { label: 'À propos', to: '/', disabled: true },
+  { label: 'À propos', to: '/' },
 ]
 
 </script>
@@ -19,10 +19,11 @@ const navItems = [
     v-model:open="mobileOpen"
     :toggle="false"
     mode="slideover"
+    title=""
     :menu="{ side: 'left', ui: { content: 'bg-[#1A0F0A] w-[280px] shadow-none sm:shadow-none' } }"
     :class="isScrolled ? 'shadow-sm' : 'shadow-none'"
     :style="{
-      '--ui-header-height': isScrolled ? '80px' : '120px',
+      '--ui-header-height': isScrolled ? '80px' : '160px',
       backgroundColor: `rgba(250, 247, 242, ${bgOpacity})`,
       borderBottomColor: `rgba(226, 213, 191, ${bgOpacity})`,
     }"
@@ -38,9 +39,13 @@ const navItems = [
     <template #left>
       <NuxtLink
         to="/"
-        class="font-fraunces font-bold text-xl text-ink-800 shrink-0"
+        :class="`font-fraunces font-bold text-xl text-ink-800 shrink-0 duration-200`"
+        :style="{ opacity: bgOpacity }"
       >
-        Simeon Cookies
+        <NuxtImg
+          src="/Simeon.png"
+          height="40"
+        />
       </NuxtLink>
     </template>
 
@@ -49,7 +54,13 @@ const navItems = [
       :items="navItems"
       variant="link"
       color="neutral"
-    />
+    >
+      <template #item-label="{item}">
+        <div :class="`font-fraunces transition-[font-size,padding] duration-500 opacity-80 ${isScrolled ? 'text-xl' : 'text-xl p-4'}`">
+          {{ item.label }}
+        </div>
+      </template>
+    </UNavigationMenu>
 
     <template #right>
       <!-- Cart -->
@@ -59,7 +70,7 @@ const navItems = [
       >
         <UIcon
           name="i-heroicons-shopping-bag"
-          class="size-[22px]"
+          :class="`text-peach-600 transition-[height,width] duration-200 ${isScrolled ? 'size-[30px]' : 'size-[40px]'}`"
         />
         <Transition name="badge-pop">
           <span
@@ -91,8 +102,6 @@ const navItems = [
           :key="link.to"
           :to="link.to"
           class="font-fraunces font-medium text-ink-800 leading-none text-[28px]"
-          :class="link.disabled ? 'opacity-40 pointer-events-none' : ''"
-          :aria-disabled="link.disabled || undefined"
           @click="mobileOpen = false"
         >
           {{ link.label }}
