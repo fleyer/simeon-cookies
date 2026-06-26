@@ -2,6 +2,7 @@
 const scrollY = useScrollY()
 const bgOpacity = computed(() => Math.min(scrollY.value / 300, 1))
 const isScrolled = computed(() => scrollY.value > 80)
+const logoTranslateY = computed(() => Math.max(8 * (1 - scrollY.value / 300), 0))
 
 const mobileOpen = ref(false)
 const cartCount = ref(0)
@@ -15,20 +16,22 @@ const navItems = [
 </script>
 
 <template>
-  <div :class="`header-host ${isScrolled ? 'scrolling' : ''}`">
+  <div 
+    :class="['header-host', { scrolling : isScrolled} ]" 
+    :style="{
+      '--header-bg-opacity': bgOpacity,
+      '--header-logo-translate-y': `${logoTranslateY}px`,
+    }"
+  >
     <UHeader
       v-model:open="mobileOpen"
       :toggle="false"
       mode="slideover"
       title=""
       :menu="{ side: 'left', ui: { content: 'bg-[#1A0F0A] w-[280px] shadow-none sm:shadow-none' } }"
-      :class="isScrolled ? 'shadow-sm' : 'shadow-none'"
-      :style="{
-        backgroundColor: `rgba(250, 247, 242, ${bgOpacity})`,
-        borderBottomColor: `rgba(226, 213, 191, ${bgOpacity})`,
-      }"
+      :class="[isScrolled ? 'shadow-sm' : 'shadow-none']"
       :ui="{
-        root: 'fixed inset-x-0 transition-none md:transition-[height,box-shadow] duration-500 backdrop-blur-none md:backdrop-blur-sm',
+        root: 'app-header fixed inset-x-0 transition-none md:transition-[height,box-shadow] duration-500 backdrop-blur-none md:backdrop-blur-sm',
         container: 'max-w-6xl px-6 md:px-12',
         center: 'hidden md:flex',
         content: 'md:hidden',
@@ -39,8 +42,7 @@ const navItems = [
       <template #left>
         <NuxtLink
           to="/"
-          :class="`font-fraunces font-bold text-xl text-ink-800 shrink-0 duration-200`"
-          :style="{ opacity: bgOpacity }"
+          :class="`font-fraunces header-logo-animation font-bold text-xl text-ink-800 shrink-0 duration-200`"
         >
           <NuxtImg
             src="/Simeon.png"
@@ -115,7 +117,18 @@ const navItems = [
 
 <style scoped>
 .header-host {
-  --ui-header-height: 40px;
+  --ui-header-height: 60px;
+}
+
+:deep(.app-header) {
+  background-color: rgba(250, 247, 242,1);
+  border-bottom-color: rgba(226, 213, 191,1);
+
+}
+
+:deep(.header-logo-animation) {
+  opacity: var(--header-bg-opacity);
+  transform: translateY(var(--header-logo-translate-y));
 }
 
 @media (min-width: 768px) {
@@ -124,6 +137,11 @@ const navItems = [
   }
   .header-host {
     --ui-header-height: 160px;
+  }
+
+  :deep(.app-header) {
+    background-color: rgba(250, 247, 242, var(--header-bg-opacity));
+    border-bottom-color: rgba(226, 213, 191, var(--header-bg-opacity));
   }
 }
 </style>

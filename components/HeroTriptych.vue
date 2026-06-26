@@ -22,7 +22,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         <!-- Center panel — featured -->
         <div class="relative aspect-auto md:aspect-[9/19] h-full max-h-full cursor-pointer">
           <div
-            class="hidden sm:flex w-[80%] h-[320px] z-10 pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center shadow-lg absolute overflow-hidden"
+            class="absolute w-[70%] md:w-[80%] h-[460px] md:h-[320px] z-10 pt-40 md:pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center shadow-lg overflow-hidden"
             :style="{ opacity: logoOpacity }"
           >
             <HeroLogo />
