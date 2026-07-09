@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { header } from '~/content/fr/header'
+
 const scrollY = useScrollY()
 const bgOpacity = computed(() => Math.min(scrollY.value / 300, 1))
 const isScrolled = computed(() => scrollY.value > 80)
@@ -8,9 +10,9 @@ const mobileOpen = ref(false)
 const cartCount = ref(0)
 
 const navItems = [
-  { label: 'Nos cookies !', to: '/', class: 'text-peach-600 rounded-full border-solid border-1' },
-  { label: 'Nos revendeurs', to: '/' },
-  { label: 'À propos', to: '/' },
+  { label: header.nav.cookies, to: '/', class: 'text-peach-600 rounded-full border-solid border-1' },
+  { label: header.nav.resellers, to: '/' },
+  { label: header.nav.about, to: '/' },
 ]
 
 </script>
@@ -68,7 +70,7 @@ const navItems = [
         <!-- Cart -->
         <button
           class="relative group/cart rounded-full p-2 text-ink-800"
-          aria-label="Panier"
+          :aria-label="header.cart.ariaLabel"
         >
           <span :class="`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white scale-0 group-hover/cart:scale-100 transition-none md:transition-transform duration-300 ease-out size-[30px] ${isScrolled ? '' : 'md:size-[55px]'}`" />
           <UIcon
@@ -88,7 +90,7 @@ const navItems = [
         <!-- Hamburger (mobile) -->
         <button
           class="md:hidden text-ink-800 ml-4"
-          aria-label="Ouvrir le menu"
+          :aria-label="header.menu.openAriaLabel"
           @click="mobileOpen = !mobileOpen"
         >
           <UIcon
