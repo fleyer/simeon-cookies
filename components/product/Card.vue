@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import { UCard } from '#components'
+import { productCard } from '~/content/fr/product-card'
 
 interface Props {
   image: string
@@ -23,9 +24,9 @@ const isSoldout = computed(() => props.status === 'soldout')
 const badgeConfig = computed(() => {
   if (!props.status) return null
   return {
-    new: { label: 'Nouveau', color: 'primary' as const, variant: 'subtle' as const },
-    featured: { label: 'Coup de cœur', color: 'secondary' as const, variant: 'solid' as const },
-    soldout: { label: 'Épuisé', color: 'neutral' as const, variant: 'subtle' as const },
+    new: { label: productCard.badges.new, color: 'primary' as const, variant: 'subtle' as const },
+    featured: { label: productCard.badges.featured, color: 'secondary' as const, variant: 'solid' as const },
+    soldout: { label: productCard.badges.soldout, color: 'neutral' as const, variant: 'subtle' as const },
   }[props.status]
 })
 
@@ -110,7 +111,7 @@ const cardUi = computed(() => ({
       <div
         v-if="rating !== undefined && !isSoldout"
         class="flex items-center mt-3"
-        :aria-label="`Note : ${formattedRating} sur 5`"
+        :aria-label="productCard.ratingLabel(formattedRating)"
       >
         <div class="flex items-center gap-0.5">
           <UIcon

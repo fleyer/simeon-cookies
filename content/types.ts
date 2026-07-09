@@ -22,3 +22,8 @@ export interface TriptychContent {
     cta: string
   }
 }
+
+export interface ProductCardContent {
+  badges: Record<'new' | 'featured' | 'soldout', string>
+  ratingLabel: (rating: string) => string
+}
