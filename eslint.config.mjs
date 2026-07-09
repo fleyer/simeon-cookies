@@ -8,7 +8,6 @@ export default [
   ...pluginVue.configs['flat/recommended'],
   ...vueTsEslintConfig(),
   {
-    files: ['pages/**/*.vue', 'layouts/**/*.vue', 'app.vue', 'error.vue'],
     rules: {
       'vue/multi-word-component-names': 'off',
     },
