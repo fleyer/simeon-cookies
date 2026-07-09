@@ -11,3 +11,14 @@ export interface HeaderContent {
     openAriaLabel: string
   }
 }
+
+export interface TriptychContent {
+  desktop: {
+    title: string
+    cta: string
+  }
+  mobile: {
+    title: string
+    cta: string
+  }
+}

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { triptych } from '~/content/fr/triptych'
+
 const scrollY = useScrollY()
 const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
 </script>
@@ -36,14 +38,14 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
       <h2
         class="font-fraunces font-bold text-peach-50 text-center leading-tight text-2xl"
       >
-        Les petits cookies sont arrivés&nbsp;!
+        {{ triptych.desktop.title }}
       </h2>
       <span
         class="translate-y-2 opacity-0 group-hover/triptych:translate-y-0 group-hover/triptych:opacity-100
              transition-all duration-300 ease-out delay-100
              text-peach-100 font-instrument-sans text-[11px] uppercase tracking-[0.3em]"
       >
-        Découvrir nos cookies
+        {{ triptych.desktop.cta }}
       </span>
       <span class="opacity-0 group-hover/triptych:opacity-100 transition-opacity duration-300 delay-200 inline-flex">
         <UIcon
@@ -63,13 +65,13 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         class="font-fraunces text-peach-50 font-semibold leading-tight mb-5"
         style="font-size: clamp(1.5rem, 6vw, 2rem)"
       >
-        Le goût des moments partagés !
+        {{ triptych.mobile.title }}
       </p>
       <UButton
         color="primary"
         variant="solid"
         size="lg"
-        label="Découvrir nos cookies"
+        :label="triptych.mobile.cta"
         class="self-start"
       />
     </div>
