@@ -1,7 +1,7 @@
 # Spec: CookieCard Component
 
-**Status**: Draft  
-**Component file**: `components/ProductCard.vue`  
+**Status**: In Progress — core structure implemented, see [Known Gaps / TODO](#known-gaps--todo)  
+**Component file**: `components/product/Card.vue` (auto-imported as `<ProductCard>`)  
 **Related**: [02b-product-grid.md](02b-product-grid.md), [00-brand.md](00-brand.md)
 
 ---
@@ -27,13 +27,14 @@ This is the atomic unit of the catalog. It must look confident and editorial, no
 | `rating` | `number` | — | `undefined` | 0–5 (decimals allowed). Omit to hide the rating row |
 | `price` | `string` | — | `undefined` | Pre-formatted price string e.g. `"12,00 €"`. Omit to hide the price line |
 | `category` | `string` | — | `undefined` | Uppercase category label e.g. `"CHOCOLAT"`. Omit to hide |
-| `link` | `string` | ✅ | — | Route for the product detail page, e.g. `/cookies/chocolat-sel` |
+| `link` | `string` | ✅ | — | Route for the product detail page, e.g. `/cookies/chocolat-sel`. Bound as `:to` on the root component |
+| `as` | `Component` | — | `UCard` | Root component to render instead of `UCard` — e.g. `UPageCard` when the card is placed inside a `UPageGrid` |
 
 ---
 
 ## Visual Anatomy
 
-Built on `UCard`, wrapped in a `NuxtLink`. Four zones stacked vertically.
+Built on `UCard` by default. The root component can be swapped via the `as` prop (e.g. `UPageCard`, for use inside a `UPageGrid`) — in every case the root component itself is the click target, bound with `:to="link"`, rather than a separate wrapping `NuxtLink`. Four zones stacked vertically.
 
 ```
 ┌─────────────────────────────────┐
@@ -62,9 +63,9 @@ Built on `UCard`, wrapped in a `NuxtLink`. Four zones stacked vertically.
 
 ### Click target
 
-The card props to is used to provide the navigation to the product page.
+The `link` prop is passed as `:to` directly on the root component (`UCard` or the component passed via `as`), which renders as a `NuxtLink` internally. There is no separate wrapping link element.
 
-Hover state on the wrapper triggers both the image scale and any lift effect.
+Hover state on the root component is intended to trigger both the image scale and any lift effect (see [Known Gaps / TODO](#known-gaps--todo) — the scale transition is not currently wired up to a hover trigger).
 
 ### Image (UCard `#header` slot)
 
@@ -174,16 +175,18 @@ Render skeleton placeholders using the `USkeleton` component at the same dimensi
 The default `UCard` radius and shadow should be overridden to match the brand's editorial feel:
 
 ```vue
-<UCard
+<component
+  :is="as ?? UCard"
   :ui="{
-    root: 'overflow-hidden rounded-none shadow-none bg-transparent',
+    root: 'overflow-hidden rounded-none bg-transparent',
+    header: 'p-0 px-0 sm:px-0',
     body: 'p-4 pt-3',
-    header: 'p-0',
   }"
+  :to="link"
 >
 ```
 
-No outer shadow on the card itself — depth comes from the image, not a card box-shadow. The hover lift effect (if used in a grid) should be on the `NuxtLink` wrapper, not the card.
+No outer shadow on the card itself — depth comes from the image, not a card box-shadow. The hover lift effect (if used in a grid) should be on the root component, not a nested element.
 
 ---
 
@@ -193,7 +196,7 @@ No outer shadow on the card itself — depth comes from the image, not a card bo
 - Stars use `aria-label` on the container: `aria-label="Note : 4,5 sur 5"`
 - Badge text is already visible — no additional `aria-label` needed
 - `soldout` state: the card is not `aria-disabled` (it's still informational); the CTA button in the parent grid handles the disabled state
-- The wrapping `NuxtLink` should have `aria-label` set to the product title if the card contains no other focusable element
+- The root component (link) should have `aria-label` set to the product title if the card contains no other focusable element — not currently set explicitly, see [Known Gaps / TODO](#known-gaps--todo)
 
 ---
 
@@ -209,6 +212,28 @@ No outer shadow on the card itself — depth comes from the image, not a card bo
   status="featured"
   :rating="4.5"
   price="12,00 € / douzaine"
-  href="/cookies/chocolat-sel"
+  link="/cookies/chocolat-sel"
 />
 ```
+
+Rendered as a `UPageCard` inside a `UPageGrid` (e.g. homepage "featured" section):
+
+```vue
+<ProductCard
+  v-bind="product"
+  :as="UPageCard"
+  class="bg-white shadow-md col-span-2 md:col-span-1"
+/>
+```
+
+---
+
+## Known Gaps / TODO
+
+Tracked against the current implementation in `components/product/Card.vue`.
+
+- [ ] **Hover scale is not wired up.** The image has `group-hover/card:scale-[1.03]`, but no ancestor in the template carries a `group/card` class, so the scale transition never triggers. Needs a `group/card` class on the root `<component>`.
+- [ ] **No lift effect on hover.** Spec calls for a hover lift on the card/root; not implemented at all yet (box-shadow or translate on hover).
+- [ ] **No explicit `aria-label`** on the root link when the card has no other focusable element (e.g. no CTA). Currently relies on `UCard`/`UPageCard`/`NuxtLink` defaults.
+- [x] ~~**Featured `ring-ink-300` border not implemented.**~~ Implemented: `status="featured"` now adds `ring-1 ring-ink-300` on the root component, overriding `UCard`'s default `ring-default` color.
+- [ ] **`00-brand.md` caption scale not referenced directly** — badge and category typography are hardcoded (`text-[11px] uppercase tracking-widest`) rather than pulled from a shared caption utility/class, so future brand-scale changes require updating them in multiple places.
