@@ -40,3 +40,9 @@
   /* Warm cream background */
   --ui-bg: #fbf2e9;
 }
+
+@layer base {
+  h2 {
+    @apply text-3xl font-bold text-center
+  }
+}

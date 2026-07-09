@@ -91,7 +91,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         <!-- Right panel — desktop only -->
         <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
           <NuxtImg
-            src="/cookies/hero/cookie-honey-chocolate.jpg"
+            src="/cookies/hero/cookies-honey-chocolate.jpg"
             alt=""
             format="webp"
             sizes="md:33vw"
