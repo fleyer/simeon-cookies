@@ -20,7 +20,10 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         </div>
 
         <!-- Center panel — featured -->
-        <div class="relative aspect-auto md:aspect-[9/19] h-full max-h-full cursor-pointer">
+        <NuxtLink
+          to="/#featured"
+          class="relative aspect-auto md:aspect-[9/19] h-full max-h-full cursor-pointer"
+        >
           <div
             class="absolute w-[70%] md:w-[80%] h-[460px] md:h-[320px] z-10 pt-40 md:pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center shadow-lg overflow-hidden"
             :style="{ opacity: logoOpacity }"
@@ -86,7 +89,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
               class="self-start"
             />
           </div>
-        </div>
+        </NuxtLink>
 
         <!-- Right panel — desktop only -->
         <div class="hidden md:flex aspect-[9/19] h-[90%] overflow-hidden">
