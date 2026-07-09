@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxt/image'],
   css: ['~/assets/css/main.css'],
+
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL ?? '/',
     head: {
@@ -16,6 +17,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   vite: {
     optimizeDeps: {
       include: [
@@ -24,6 +26,13 @@ export default defineNuxtConfig({
       ]
     }
   },
+
+  router: {
+    options: {
+      scrollBehaviorType: "smooth"
+    }
+  },
+
   runtimeConfig: {
     public: {
       shopifyStoreDomain: process.env.NUXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? 'mock.shop',

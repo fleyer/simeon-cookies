@@ -3,7 +3,7 @@ import vueTsEslintConfig from '@vue/eslint-config-typescript'
 
 export default [
   {
-    ignores: ['.nuxt/**', '.output/**', 'node_modules/**', '**/*.ts', '**/*.js', '**/*.mjs'],
+    ignores: ['.nuxt/**', '.output/**', 'node_modules/**'],
   },
   ...pluginVue.configs['flat/recommended'],
   ...vueTsEslintConfig(),
