@@ -4,4 +4,6 @@ pre-commit:
     typecheck:
       run: bun run typecheck
     lint:
-      run: bun run lint --fix
+      glob: "*.{js,ts,vue}"
+      run: bunx oxlint {staged_files} && bunx eslint --fix {staged_files}
+      stage_fixed: true
