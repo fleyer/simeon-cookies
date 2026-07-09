@@ -1,13 +1,7 @@
-<script setup lang="ts">
-import BaseLayout from './layouts/Base.vue';
-
-</script>
-
 <template>
   <UApp>
-    <AppHeader />
-    <BaseLayout>
+    <NuxtLayout>
       <NuxtPage />
-    </BaseLayout>
+    </NuxtLayout>
   </UApp>
 </template>
