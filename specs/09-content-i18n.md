@@ -2,7 +2,7 @@
 
 **Status**: Draft
 **Type**: Architecture — cross-cutting
-**Related**: [01-header.md](01-header.md), [02a-hero.md](02a-hero.md), [02c-feature-callout.md](02c-feature-callout.md), [07-cookie-card.md](07-cookie-card.md), [06-store-config.md](06-store-config.md)
+**Related**: [01-header.md](01-header.md), [02a-hero.md](02a-hero.md), [02c-feature-callout.md](02c-feature-callout.md), [08-cookie-card.md](08-cookie-card.md), [07-store-config.md](07-store-config.md)
 
 ---
 
@@ -26,8 +26,8 @@ This spec extracts that copy into dedicated, typed content files — one static 
 - Templated strings with interpolation (e.g. "Note : 4,5 sur 5")
 
 **Out of scope**:
-- **Shopify product data** (title, subtitle, description, price for actual SKUs). This is runtime data owned by Shopify, not static copy — see [06-store-config.md](06-store-config.md) "What Goes Here vs. What Doesn't." Shopify has its own translation tooling (Markets) if the store ever localizes product content; this spec doesn't touch that. Note: the `product` / `product2` mock objects currently hardcoded in `components/section/Featured.vue` fall in this bucket too — they're placeholder Shopify data, not UI chrome, and will disappear once the Storefront API is wired up.
-- **Store facts** (email, address, social links, legal text) — those already have a home in [06-store-config.md](06-store-config.md) and stay there. Don't duplicate them here.
+- **Shopify product data** (title, subtitle, description, price for actual SKUs). This is runtime data owned by Shopify, not static copy — see [07-store-config.md](07-store-config.md) "What Goes Here vs. What Doesn't." Shopify has its own translation tooling (Markets) if the store ever localizes product content; this spec doesn't touch that. Note: the `product` / `product2` mock objects currently hardcoded in `components/section/Featured.vue` fall in this bucket too — they're placeholder Shopify data, not UI chrome, and will disappear once the Storefront API is wired up.
+- **Store facts** (email, address, social links, legal text) — those already have a home in [07-store-config.md](07-store-config.md) and stay there. Don't duplicate them here.
 - **A language switcher or locale routing.** No `/en/...` routes, no `useSwitchLocalePath`, nothing runtime. That's future work, sketched in [Adding a Second Locale](#adding-a-second-locale-future) purely so today's structure doesn't block it.
 - **`@nuxtjs/i18n` as a dependency.** Not needed to serve one language. Revisit only when a second locale is actually being built.
 
@@ -193,7 +193,7 @@ Not extracted: `product` / `product2` mock objects (see [Scope](#scope) — Shop
 
 ### `pages/index.vue`
 
-`"work in progress"` — left as-is. It's a placeholder for an unbuilt page section, same category as the "à compléter" markers in [06-store-config.md](06-store-config.md). Extract once that section has real content.
+`"work in progress"` — left as-is. It's a placeholder for an unbuilt page section, same category as the "à compléter" markers in [07-store-config.md](07-store-config.md). Extract once that section has real content.
 
 ---
 

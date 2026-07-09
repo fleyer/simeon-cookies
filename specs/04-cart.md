@@ -130,7 +130,7 @@ When the cart has no items:
 
 ## "Item added" Confirmation
 
-When a user adds an item to cart (from the product grid), the cart drawer opens automatically and the newly added item briefly highlights:
+When a user adds an item to cart (from the [order page](03-order.md) or the homepage's Feature Callout), the cart drawer opens automatically and the newly added item briefly highlights:
 - The new row has a 1px Burnt Sienna left border that fades out over 1.5 seconds
 - No toast or popup — the drawer itself is the confirmation
 

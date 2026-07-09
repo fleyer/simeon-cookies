@@ -98,7 +98,7 @@ After a successful payment, Shopify redirects back to Simeon Cookies. The destin
 
 `/order/confirmation?order=[id]&token=[token]`
 
-This page is specced separately (see `05-order.md`).
+This page is specced separately (see `06-order-confirmation.md`).
 
 On payment failure, Shopify keeps the user in its own checkout with an inline error — Simeon Cookies is not involved.
 

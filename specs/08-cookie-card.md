@@ -2,7 +2,7 @@
 
 **Status**: In Progress — core structure implemented, see [Known Gaps / TODO](#known-gaps--todo)  
 **Component file**: `components/product/Card.vue` (auto-imported as `<ProductCard>`)  
-**Related**: [02b-product-grid.md](02b-product-grid.md), [00-brand.md](00-brand.md)
+**Related**: [03-order.md](03-order.md), [00-brand.md](00-brand.md)
 
 ---
 
@@ -148,7 +148,7 @@ Dark ink `Coup de cœur` badge. Card may optionally add a 1px `ring-ink-300` bor
 - Image: `brightness-75 grayscale-[30%]`
 - Title and subtitle: `opacity-60`
 - Rating row: hidden (irrelevant when unavailable)
-- No CTA interaction (CTA is outside this component's scope — see product grid spec)
+- No CTA interaction (CTA is outside this component's scope — see [order page spec](03-order.md))
 
 ### Loading / Skeleton
 Render skeleton placeholders using the `USkeleton` component at the same dimensions:

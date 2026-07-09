@@ -1,8 +1,8 @@
 # Spec: Homepage — Hero Multi-CTA (Left/Right Panels)
 
-**Status**: Draft — pending routes, content, and image decisions (see Open Questions)
+**Status**: Ready for implementation — copy finalized, hover fix is in scope; imagery to follow later, implement against current placeholders
 **Parent**: [02a-hero.md](02a-hero.md)
-**Related**: [02-homepage.md](02-homepage.md), [08-content-i18n.md](08-content-i18n.md)
+**Related**: [02-homepage.md](02-homepage.md), [03-order.md](03-order.md), [09-content-i18n.md](09-content-i18n.md)
 
 ---
 
@@ -18,11 +18,11 @@ Brand identity (`HeroLogo`) stays anchored in the center panel only. It is not r
 
 | Panel | Component | Intent | Target route | Visual weight |
 |---|---|---|---|---|
-| Left | `components/triptych/Left.vue` | Order | `/order` *(new route)* | Secondary |
+| Left | `components/triptych/Left.vue` | Order | `/order` *(new route — created ahead of this spec's implementation, not part of it)* | Secondary |
 | Center | `components/triptych/Main.vue` | Discover products (brand lives here) | `/#featured` *(existing, unchanged)* | Primary |
-| Right | `components/triptych/Right.vue` | Discover events | `/events` *(new route)* | Secondary |
+| Right | `components/triptych/Right.vue` | Discover events | `/#event` *(anchor on the homepage, not a standalone route)* | Secondary |
 
-Priority order left → right: **Order → Discover → Events**. This follows the existing image assignment (strawberry / cookie-signature / honey-chocolate) — confirm this ordering is intentional, or swap Order/Events if events should lead.
+Priority order left → right: **Order → Discover → Events**. This follows the existing image assignment (strawberry / cookie-signature / honey-chocolate).
 
 ---
 
@@ -36,8 +36,8 @@ All three panels already render side by side (`HeroTriptych.vue`). Bring Left/Ri
 - Add the same `bg-gradient-to-t from-ink-900/50` → `/70` hover treatment used in `Main.vue`.
 - Reveal on hover:
   - Short title (Fraunces, matches Main's title styling but smaller — these are secondary panels)
-  - Uppercase micro-label, Instrument Sans, 11px, `tracking-[0.3em]` (matching Main's CTA label style): "Commander" / "Découvrir nos événements"
-- **Implementation note**: `Main.vue`'s hover states key off `group-hover/triptych`, a group shared across all three panels. If Left/Right adopt the same shared group, hovering any one panel would reveal all three captions at once. Each panel needs its own scoped group (e.g. `group/panel` on the individual `NuxtLink`) so captions reveal independently per panel.
+  - Uppercase micro-label, Instrument Sans, 11px, `tracking-[0.3em]` (matching Main's CTA label style): "C'est ici" / "Rejoingnez nous"
+- **Implementation note (in scope, must ship with this spec)**: `Main.vue`'s hover states key off `group-hover/triptych`, a group shared across all three panels. If Left/Right adopt the same shared group, hovering any one panel would reveal all three captions at once. Each panel needs its own scoped group (e.g. `group/panel` on the individual `NuxtLink`) so captions reveal independently per panel.
 
 ### Mobile (< md)
 
@@ -45,38 +45,63 @@ Left/Right are currently `hidden md:flex` — on mobile, Order and Events have *
 
 - Side panels stay hidden on mobile (no change — there's no room for three full panels).
 - Add a secondary CTA row below the hero image, still inside the `HeroTriptych` section (above `SectionFeatured`):
-  - `UButton` variant="outline" or "ghost" (secondary weight) — "Commander" → `/order`
-  - `UButton` same treatment — "Événements" → `/events`
+  - `UButton` variant="outline" or "ghost" (secondary weight) — "C'est ici" → `/order`
+  - `UButton` same treatment — "Rejoingnez nous" → `/#event`
   - Laid out side by side, visually subordinate to the existing full-bleed mobile CTA ("Découvrir nos cookies"), which remains the dominant action.
 
 ---
 
 ## Content
 
-No copy for these two panels exists yet. Per [08-content-i18n.md](08-content-i18n.md), new UI strings should land in a content module rather than inline in the component — likely a `content/fr/hero.ts` (doesn't exist yet; today only `content/fr/header.ts` exists as a copy convention).
+Per [09-content-i18n.md](09-content-i18n.md), new UI strings land in a content module rather than inline in the component — a new `content/fr/hero.ts` (doesn't exist yet; today only `content/fr/header.ts` exists as a copy convention).
 
-Needed strings (French, placeholders — final copy TBD):
+Final strings (French):
 
-| Key | Placeholder | Used |
+| Key | Copy | Used |
 |---|---|---|
-| Left title | *TBD* | Desktop hover caption |
-| Left CTA label | "Commander" | Desktop hover micro-label + mobile button |
-| Right title | *TBD* | Desktop hover caption |
-| Right CTA label | "Découvrir nos événements" | Desktop hover micro-label + mobile button |
+| Left title | "Les commandes sont disponibles" | Desktop hover caption |
+| Left CTA label | "C'est ici" | Desktop hover micro-label + mobile button |
+| Right title | "Envie de participer ?" | Desktop hover caption |
+| Right CTA label | "Rejoingnez nous" | Desktop hover micro-label + mobile button |
+
+Note: "Rejoingnez nous" as given — likely meant "Rejoignez-nous"; flagging in case it's a typo rather than intentional, otherwise using as-is.
 
 ---
 
-## Open Questions
+## Task List
 
-1. **Routes don't exist yet.** `/order` and `/events` need pages (can start as stubs) before links can go live.
-2. **Copy** is entirely unwritten — titles for Left/Right hover captions, mobile headline (if any), button labels are all placeholders above.
-3. **Images.** Left/Right currently use `cookies-strawberry.jpg` / `cookies-honey-chocolate.jpg` — product photography, not "order" or "events" imagery. Decide: keep as on-brand decorative images, or source dedicated imagery per intent (e.g. an events/tasting photo for the Right panel).
-4. **Hover group scoping bug** (see Implementation note above) must be fixed as part of this work, not left as a follow-up — otherwise all three panels light up together on any hover.
-5. **Ordering**: confirm Order (left) / Events (right) placement, or swap.
+Ship one panel at a time — **Events first, then Order** — so each CTA lands as a complete, independently testable slice (route stub, content, desktop hover, mobile button) rather than one big cross-cutting change.
+
+### 1. Events CTA (Right panel)
+
+- [ ] Add `content/fr/hero.ts` with Right title ("Envie de participer ?") + CTA label ("Rejoingnez nous")
+- [ ] Wrap `components/triptych/Right.vue` image in `NuxtLink` to `/#event` (target section doesn't exist yet — ships as a dead anchor until it's built later)
+- [ ] Fix the hover group scoping bug as part of this panel's work: give it its own scoped `group/panel` instead of the shared `group-hover/triptych` (see Layout note above)
+- [ ] Add hover gradient (`from-ink-900/50` → `/70`) + reveal caption (title + micro-label) using the scoped group
+- [ ] Add mobile "Rejoingnez nous" `UButton` in the secondary CTA row, linking to `/#event`
+
+### 2. Order CTA (Left panel)
+
+- [ ] Confirm `/order` route exists (see [03-order.md](03-order.md) — created ahead of this spec, not built here)
+- [ ] Add Left title ("Les commandes sont disponibles") + CTA label ("C'est ici") to `content/fr/hero.ts`
+- [ ] Wrap `components/triptych/Left.vue` image in `NuxtLink` to `/order`
+- [ ] Add hover gradient + reveal caption, scoped to its own `group/panel`
+- [ ] Add mobile "C'est ici" `UButton` in the secondary CTA row, linking to `/order`
+
+### 3. Cross-panel polish
+
+- [ ] Verify hover states on all three panels reveal independently (regression check on the shared-group fix)
+- [ ] Swap in dedicated Order/Events imagery once provided (see Notes below) — placeholders until then
+
+---
+
+## Notes
+
+- **Images.** Left/Right currently use `cookies-strawberry.jpg` / `cookies-honey-chocolate.jpg` as placeholders. Dedicated Order/Events imagery will be provided later — implement against the current placeholders and swap them in when the final assets land (no component/layout change expected, just the source file).
 
 ---
 
 ## Out of Scope
 
 - Header/nav links to Order or Events (header currently lists Cookies / Resellers / About — see [01-header.md](01-header.md)). Not addressed here.
-- Building out the `/order` or `/events` pages themselves — only the hero's entry points into them.
+- Building the `/order` route itself (prerequisite, done ahead of this spec) and building the homepage section that `#event` anchors to (later work, done after this spec) — this spec only wires up the hero's entry points into them.

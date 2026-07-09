@@ -15,12 +15,13 @@ Secondary: it establishes the brand's character on first impression. A visitor w
 
 ## Page Structure
 
-The page is divided into four sections, read top-to-bottom:
+The page is divided into three sections, read top-to-bottom:
 
 1. **Hero** — full-bleed, editorial opening → [02a-hero.md](02a-hero.md)
-2. **Product Grid** — the catalog → [02b-product-grid.md](02b-product-grid.md)
-3. **Feature Callout** — one product or story, told with depth → [02c-feature-callout.md](02c-feature-callout.md)
-4. **Footer** — minimal, practical → [02d-footer.md](02d-footer.md)
+2. **Feature Callout** — one product or story, told with depth → [02c-feature-callout.md](02c-feature-callout.md)
+3. **Footer** — minimal, practical → [02d-footer.md](02d-footer.md)
+
+The full catalog is not on the homepage — it's a dedicated page at `/order`, reached via the hero's Left panel CTA → [03-order.md](03-order.md), [02a-hero-ctas.md](02a-hero-ctas.md).
 
 Supporting specs:
 

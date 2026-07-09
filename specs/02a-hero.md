@@ -56,7 +56,7 @@ The hero is a gallery wall. Three photographs of cookies hang side by side like 
 - **Shop name**: "Simeon" — not "Simeon Cookies", not a tagline
 - **Mobile headline**: *"Des cookies qui méritent d'attendre."* — declarative, no question mark
 - **CTA label**: "Découvrir nos cookies" (desktop: text only; mobile: button)
-- **CTA target**: scrolls to or navigates to the product grid (not yet wired — pending product section)
+- **CTA target**: `/#featured` — scrolls to the Feature Callout section on the homepage (see [02a-hero-ctas.md](02a-hero-ctas.md); the catalog itself now lives at a dedicated `/order` page, not on the homepage)
 
 ---
 
@@ -89,6 +89,5 @@ Currently stored in `public/cookies/hero/`. Source of truth for these images is 
 
 ## Open questions
 
-- **Image source**: Will product images eventually come from Shopify (Storefront API) or a local content module? Hero images may remain static even if product grid images are API-driven.
-- **CTA target**: needs to scroll to / link to the product grid once that section exists.
+- **Image source**: Will product images eventually come from Shopify (Storefront API) or a local content module? Hero images may remain static even if the `/order` catalog's images are API-driven.
 - **Header overlap**: header spec calls for transparent header on the hero — not yet implemented.

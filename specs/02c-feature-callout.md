@@ -25,12 +25,12 @@ Give one product — or one story about the craft — space to breathe. This sec
 - **Kicker** (small label): "Le préféré de la semaine" / "Le choix du boulanger" / "Nouveauté"
 - **Headline**: Product name, large (Fraunces 600, 48px)
 - **Description**: 2–3 phrases sur ce qui rend ce cookie spécifique. Notes de dégustation, ingrédients, pourquoi il existe.
-- **CTA**: "Ajouter au panier" or "Voir tous nos cookies" depending on whether it's a specific product
+- **CTA**: "Ajouter au panier" or "Voir tous nos cookies" (→ [`/order`](03-order.md)) depending on whether it's a specific product
 
 ---
 
 ## Visual Design
 
-- Section background: Espresso (`#1A0F0A`) — dark, creates contrast and drama after the light product grid
+- Section background: Espresso (`#1A0F0A`) — dark, creates contrast and drama after the light hero
 - Text in Cream on the dark background
 - The image is the focal point; text is secondary

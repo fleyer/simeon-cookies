@@ -169,7 +169,7 @@ commerce:
 `freeShippingThreshold` is referenced in:
 - The cart drawer shipping note ("Livraison offerte dès 50,00 €")
 - Any promotional copy on the homepage
-- The checkout configuration reminder in `04-payment.md`
+- The checkout configuration reminder in `05-payment.md`
 
 Setting it to `null` removes the free shipping messaging entirely — no component changes needed.
 
