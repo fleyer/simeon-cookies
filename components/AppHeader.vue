@@ -10,7 +10,7 @@ const mobileOpen = ref(false)
 const cartCount = ref(0)
 
 const navItems = [
-  { label: header.nav.cookies, to: '/', class: 'text-peach-600 rounded-full border-solid border-1' },
+  { label: header.nav.cookies, to: '/order', class: 'text-peach-600 rounded-full border-solid border-1' },
   { label: header.nav.resellers, to: '/' },
   { label: header.nav.about, to: '/' },
 ]

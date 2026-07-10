@@ -27,3 +27,7 @@ export interface ProductCardContent {
   badges: Record<'new' | 'featured' | 'soldout', string>
   ratingLabel: (rating: string) => string
 }
+
+export interface OrderContent {
+  heading: string
+}
