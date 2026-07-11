@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { hero } from '~/content/fr/hero'
+
+const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
 </script>
 
 <template>
@@ -7,28 +9,38 @@ import { hero } from '~/content/fr/hero'
     <div class="flex flex-col flex-1 w-full max-w-6xl mx-auto min-h-0">
       <!-- Triptych -->
       <div class="flex items-center justify-center gap-0 md:gap-10 px-0 md:px-12 pb-0 md:pb-8 md:pb-12 flex-1 min-h-0">
-        <TriptychLeft />
-        <TriptychMain />
-        <TriptychRight />
-      </div>
-
-      <!-- Mobile: secondary CTA row (Order / Events) -->
-      <div class="md:hidden flex items-center justify-center gap-3 px-6 pb-6">
-        <UButton
-          color="secondary"
-          variant="outline"
-          size="md"
-          :label="hero.left.cta"
+        <TriptychSide
           to="/order"
-          class="flex-1 justify-center"
+          image="/cookies/hero/cookies-strawberry.jpg"
+          :title="hero.left.title"
+          :cta="hero.left.cta"
+          :active="isActive(0)"
+          :progress="progressFor(0)"
+          @mouseenter="hoverEnter(0)"
+          @mouseleave="hoverLeave(0)"
         />
-        <UButton
-          color="secondary"
-          variant="outline"
-          size="md"
-          :label="hero.right.cta"
+        <TriptychMain
+          :active="isActive(1)"
+          :progress="progressFor(1)"
+          @mouseenter="hoverEnter(1)"
+          @mouseleave="hoverLeave(1)"
+        >
+          <template #cta>
+            <TriptychCtaDesktop :active="isActive(1)">
+              <TriptychProgressBar :progress="progressFor(1)" />
+            </TriptychCtaDesktop>
+            <TriptychCtaMobile />
+          </template>
+        </TriptychMain>
+        <TriptychSide
           to="/#event"
-          class="flex-1 justify-center"
+          image="/cookies/hero/cookies-honey-chocolate.jpg"
+          :title="hero.right.title"
+          :cta="hero.right.cta"
+          :active="isActive(2)"
+          :progress="progressFor(2)"
+          @mouseenter="hoverEnter(2)"
+          @mouseleave="hoverLeave(2)"
         />
       </div>
     </div>

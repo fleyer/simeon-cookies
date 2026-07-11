@@ -18,8 +18,12 @@ export interface TriptychContent {
     cta: string
   }
   mobile: {
-    title: string
-    cta: string
+    items: Array<{
+      title: string
+      ctaLabel: string
+      link?: string
+    }>
+    
   }
 }
 

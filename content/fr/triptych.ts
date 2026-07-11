@@ -6,7 +6,22 @@ export const triptych = {
     cta: 'Découvrir nos cookies',
   },
   mobile: {
-    title: 'Le goût des moments partagés !',
-    cta: 'Découvrir nos cookies',
+    items: [
+      {
+        title: "Commander",
+        ctaLabel: "C'est ici!",
+        link: "/order"
+      },
+      {
+        title: "Prochain évènnement",
+        ctaLabel: "Voir le calendrier",
+        link: "/#events"
+      },
+      {
+        title: "Faire une demande",
+        ctaLabel: "C'est facile",
+        link: "/#"
+      }
+    ]
   },
 } satisfies TriptychContent
