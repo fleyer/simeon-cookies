@@ -91,3 +91,4 @@ Not in the initial build. A simple tag-based filter (e.g., "Tous / Chocolat / Sa
 - Filtering (see Filtering above)
 - Product detail page (`/cookies/[handle]`) — separate spec to come
 - Cart drawer internals — see [04-cart.md](04-cart.md)
+- Wire soldout state → "Me prévenir" label, disabled
