@@ -11,7 +11,7 @@ const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
       <div class="flex items-center justify-center gap-0 md:gap-10 px-0 md:px-12 pb-0 md:pb-8 md:pb-12 flex-1 min-h-0">
         <TriptychSide
           to="/order"
-          image="/cookies/hero/cookies-strawberry.jpg"
+          :image="hero.left.imageSrc"
           :title="hero.left.title"
           :cta="hero.left.cta"
           :active="isActive(0)"
@@ -34,7 +34,7 @@ const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
         </TriptychMain>
         <TriptychSide
           to="/#event"
-          image="/cookies/hero/cookies-honey-chocolate.jpg"
+          :image="hero.right.imageSrc"
           :title="hero.right.title"
           :cta="hero.right.cta"
           :active="isActive(2)"

@@ -36,13 +36,13 @@ export interface OrderContent {
   heading: string
 }
 
+interface ImagePanel {
+  title: string,
+  cta: string,
+  imageSrc: string
+}
+
 export interface HeroContent {
-  left: {
-    title: string
-    cta: string
-  }
-  right: {
-    title: string
-    cta: string
-  }
+  left: ImagePanel
+  right: ImagePanel
 }
