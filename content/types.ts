@@ -31,9 +31,27 @@ export interface ProductCardContent {
   badges: Record<'new' | 'featured' | 'soldout', string>
   ratingLabel: (rating: string) => string
 }
+export type ProductStatus = "featured" | "soldout" | "new" ;
+
+export interface Product {
+  title: string,
+  subtitle: string,
+  price?: number,
+  rating?: number,
+  image?: string,
+  imageAlt: string,
+  status?: ProductStatus,
+  category?: string,
+  description: string,
+  link: string
+}
 
 export interface OrderContent {
-  heading: string
+  heading: string,
+  product: {
+    orderButton: string
+  }
+  catalog: Product[]
 }
 
 interface ImagePanel {
