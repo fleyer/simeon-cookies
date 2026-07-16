@@ -2,6 +2,7 @@
 import type { Component } from 'vue'
 import { UCard } from '#components'
 import { productCard } from '~/content/fr/product-card'
+import type { ProductStatus } from '~/content/types'
 
 interface Props {
   image: string
@@ -9,7 +10,7 @@ interface Props {
   title: string
   subtitle: string
   description: string
-  status?: 'new' | 'featured' | 'soldout'
+  status?: ProductStatus
   rating?: number
   price?: string
   category?: string
@@ -27,6 +28,8 @@ const badgeConfig = computed(() => {
     new: { label: productCard.badges.new, color: 'primary' as const, variant: 'subtle' as const },
     featured: { label: productCard.badges.featured, color: 'secondary' as const, variant: 'solid' as const },
     soldout: { label: productCard.badges.soldout, color: 'neutral' as const, variant: 'subtle' as const },
+    available: { label: productCard.badges.available, color: 'neutral' as const, variant: 'subtle' as const },
+    popular: { label: productCard.badges.popular, color: 'neutral' as const, variant: 'subtle' as const },
   }[props.status]
 })
 

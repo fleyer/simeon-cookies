@@ -8,7 +8,7 @@ export const order = {
   },
 
   catalog: [
-    {
+  {
       title: "Cookie à la fraise",
       subtitle: "les meilleurs, ils vont vous faire fondre !",
       image: "/products/cookies-strawberry.jpg",
@@ -17,6 +17,24 @@ export const order = {
       category: "NOUVEAU !",
       description: "Un mélange de couleur",
       link: "/order"
+    },
+    {
+      title: "Cookie au miel et au chocolat",
+      subtitle: "Une explosion de saveur",
+      image: "/products/cookies-honey-chocolate.jpg",
+      imageAlt: "cookie au miel et au chocolat",
+      status: "popular",
+      description: "Ils l'adorent !",
+      link: "/order"
+    },
+    {
+      title: "Cookie à la mangue",
+      subtitle: "Envie de chaleur tropicale ?",
+      image: "/products/cookies-honey-chocolate.jpg",
+      imageAlt: "cookie a la mangue",
+      status: "soldout",
+      description: "Vous allez craquer",
+      link: "/order"
     }
-  ]
+]
 } satisfies OrderContent

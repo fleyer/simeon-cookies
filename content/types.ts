@@ -28,10 +28,11 @@ export interface TriptychContent {
 }
 
 export interface ProductCardContent {
-  badges: Record<'new' | 'featured' | 'soldout', string>
+  badges: Record<'new' | 'featured' | 'soldout' | 'popular' | 'available', string>
   ratingLabel: (rating: string) => string
 }
-export type ProductStatus = "featured" | "soldout" | "new" ;
+
+export type ProductStatus = "featured" | "soldout" | "new" | "popular" | "available";
 
 export interface Product {
   title: string,
