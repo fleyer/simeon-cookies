@@ -12,7 +12,7 @@ interface Props {
   description: string
   status?: ProductStatus
   rating?: number
-  price?: string
+  price?: number
   category?: string
   link: string
   as?: Component
@@ -20,7 +20,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { badgeConfig, formattedRating, stars, isSoldout } = useProduct(props) 
+const { badgeConfig, formattedRating, stars, isSoldout, formattedPrice} = useProduct(props) 
 
 const cardUi = computed(() => ({
   root: [
@@ -59,61 +59,63 @@ const cardUi = computed(() => ({
       </div>
     </template>
 
-    <div class="p-4 sm:p-4">
-      <p
-        v-if="category"
-        class="font-instrument-sans text-[11px] uppercase tracking-widest text-ink-400"
-      >
-        {{ category }}
-      </p>
+    <template #body>
+      <div class="p-4 sm:p-4">
+        <!-- <p
+          v-if="category"
+          class="font-instrument-sans text-[11px] uppercase tracking-widest text-ink-400"
+        >
+          {{ category }}
+        </p> -->
 
-      <h3
-        class="font-fraunces font-medium text-xl text-ink-800 transition-opacity duration-300"
-        :class="[category ? 'mt-0.5' : '', isSoldout ? 'opacity-60' : '']"
-      >
-        {{ title }}
-      </h3>
+        <h3
+          class="font-fraunces font-medium text-xl text-ink-800 transition-opacity duration-300"
+          :class="[category ? 'mt-0.5' : '', isSoldout ? 'opacity-60' : '']"
+        >
+          {{ title }}
+        </h3>
 
-      <p
-        class="font-lora italic text-sm text-ink-600 truncate transition-opacity duration-300"
-        :class="isSoldout ? 'opacity-60' : ''"
-      >
-        {{ subtitle }}
-      </p>
+        <p
+          class="font-lora italic text-sm text-ink-600 truncate transition-opacity duration-300"
+          :class="isSoldout ? 'opacity-60' : ''"
+        >
+          {{ subtitle }}
+        </p>
 
-      <p class="font-instrument-sans text-sm text-ink-700 mt-2 line-clamp-3">
-        {{ description }}
-      </p>
+        <p class="font-instrument-sans text-sm text-ink-700 mt-2 line-clamp-3">
+          {{ description }}
+        </p>
 
-      <div
-        v-if="rating !== undefined && !isSoldout"
-        class="flex items-center mt-3"
-        :aria-label="productCard.ratingLabel(formattedRating)"
-      >
-        <div class="flex items-center gap-0.5">
-          <UIcon
-            v-for="(type, i) in stars"
-            :key="i"
-            :name="type === 'empty' ? 'i-heroicons-star' : 'i-heroicons-star-solid'"
-            class="size-4"
-            :class="{
-              'text-peach-500': type === 'full',
-              'text-peach-300': type === 'half',
-              'text-ink-200': type === 'empty',
-            }"
-          />
+        <div
+          v-if="rating !== undefined && !isSoldout"
+          class="flex items-center mt-3"
+          :aria-label="productCard.ratingLabel(formattedRating)"
+        >
+          <div class="flex items-center gap-0.5">
+            <UIcon
+              v-for="(type, i) in stars"
+              :key="i"
+              :name="type === 'empty' ? 'i-heroicons-star' : 'i-heroicons-star-solid'"
+              class="size-4"
+              :class="{
+                'text-peach-500': type === 'full',
+                'text-peach-300': type === 'half',
+                'text-ink-200': type === 'empty',
+              }"
+            />
+          </div>
+          <span class="font-instrument-sans text-[11px] text-ink-500 ml-2">
+            ({{ formattedRating }}&nbsp;/&nbsp;5)
+          </span>
         </div>
-        <span class="font-instrument-sans text-[11px] text-ink-500 ml-2">
-          ({{ formattedRating }}&nbsp;/&nbsp;5)
-        </span>
-      </div>
 
-      <p
-        v-if="price"
-        class="font-instrument-sans font-medium text-sm text-ink-800 mt-3"
-      >
-        {{ price }}
-      </p>
-    </div>
+        <p
+          v-if="price"
+          class="font-instrument-sans font-medium text-sm text-ink-800 mt-3"
+        >
+          {{ formattedPrice }}
+        </p>
+      </div>
+    </template>
   </component>
 </template>

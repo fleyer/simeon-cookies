@@ -1,9 +1,15 @@
+import { order } from "~/content/fr/order";
 import { productCard } from "~/content/fr/product-card";
 import type { ProductStatus } from "~/content/types";
 
 export interface ProductComposableProps {
   status?: ProductStatus,
-  rating?: number
+  rating?: number,
+  price?: number
+}
+
+const currencies = {
+  'euros': '€'
 }
 
 export const useProduct = (props : ProductComposableProps ) => ({
@@ -31,6 +37,12 @@ export const useProduct = (props : ProductComposableProps ) => ({
       available: { label: productCard.badges.available, color: 'neutral' as const, variant: 'subtle' as const },
       popular: { label: productCard.badges.popular, color: 'neutral' as const, variant: 'subtle' as const },
     }[props.status]
+  }),
+
+  formattedPrice: computed(() => {
+    if(!props.price) return ''
+
+    return `${props.price} ${currencies[order.currency]}`
   }),
 
   isSoldout: computed(() => props.status === 'soldout')

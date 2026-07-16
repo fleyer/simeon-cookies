@@ -7,6 +7,8 @@ export const order = {
     orderButton: "Ajouter"
   },
 
+  currency: "euros",
+
   catalog: [
   {
       title: "Cookie à la fraise",
@@ -16,7 +18,8 @@ export const order = {
       status: "featured",
       category: "NOUVEAU !",
       description: "Un mélange de couleur",
-      link: "/order"
+      link: "/order",
+      price: 10
     },
     {
       title: "Cookie au miel et au chocolat",
@@ -25,7 +28,9 @@ export const order = {
       imageAlt: "cookie au miel et au chocolat",
       status: "popular",
       description: "Ils l'adorent !",
-      link: "/order"
+      link: "/order",
+      price: 7.99
+
     },
     {
       title: "Cookie à la mangue",
@@ -34,7 +39,8 @@ export const order = {
       imageAlt: "cookie a la mangue",
       status: "soldout",
       description: "Vous allez craquer",
-      link: "/order"
+      link: "/order",
+      price: 5
     }
 ]
 } satisfies OrderContent

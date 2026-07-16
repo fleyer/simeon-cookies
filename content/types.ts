@@ -49,6 +49,7 @@ export interface Product {
 
 export interface OrderContent {
   heading: string,
+  currency: "euros" | undefined,
   product: {
     orderButton: string
   }
