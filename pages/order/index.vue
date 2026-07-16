@@ -18,7 +18,7 @@ import { order } from '~/content/fr/order'
         :as="UPageCard"
       >
         <template #footer>
-          <div class="w-full flex justify-end items-center">
+          <div class="w-full flex justify-end items-center p-2">
             <UButton variant="solid">
               {{ order.product.orderButton }}
             </UButton>

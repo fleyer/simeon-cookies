@@ -30,6 +30,7 @@ const cardUi = computed(() => ({
   container: 'p-0 sm:p-0 gap-0',
   header: 'p-0 px-0 sm:px-0',
   body: 'pt-3',
+  footer: 'w-full'
 }))
 </script>
 
@@ -116,6 +117,10 @@ const cardUi = computed(() => ({
           {{ formattedPrice }}
         </p>
       </div>
+    </template>
+
+    <template #footer>
+      <slot name="footer" />
     </template>
   </component>
 </template>
