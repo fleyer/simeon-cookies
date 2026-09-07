@@ -5,22 +5,26 @@ import { productCard } from '~/content/fr/product-card'
 import type { ProductStatus } from '~/content/types'
 
 interface Props {
-  image: string
+  image?: string
   imageAlt?: string
-  title: string
-  subtitle: string
-  description: string
+  title?: string
+  subtitle?: string
+  description?: string
   status?: ProductStatus
   rating?: number
-  price?: number
+  price?: string
   category?: string
-  link: string
+  link?: string
   as?: Component
+  loading?: boolean
 }
 
 const props = defineProps<Props>()
 
-const { badgeConfig, formattedRating, stars, isSoldout, formattedPrice} = useProduct(props) 
+const { badgeConfig, formattedRating, stars, isSoldout } = useProduct({
+  status: props.status,
+  rating: props.rating,
+})
 
 const cardUi = computed(() => ({
   root: [
@@ -38,10 +42,17 @@ const cardUi = computed(() => ({
   <component
     :is="as ?? UCard"
     :ui="cardUi"
-    :to="link"
+    :to="loading ? undefined : link"
   >
     <template #header>
-      <div class="relative aspect-square overflow-hidden">
+      <USkeleton
+        v-if="loading"
+        class="w-full aspect-square"
+      />
+      <div
+        v-else
+        class="relative aspect-square overflow-hidden"
+      >
         <NuxtImg
           :src="image"
           :alt="imageAlt ?? title"
@@ -61,7 +72,20 @@ const cardUi = computed(() => ({
     </template>
 
     <template #body>
-      <div class="p-4 sm:p-4">
+      <div
+        v-if="loading"
+        class="p-4 space-y-2"
+      >
+        <USkeleton class="h-5 w-3/5" />
+        <USkeleton class="h-4 w-2/5" />
+        <USkeleton class="h-3 w-full" />
+        <USkeleton class="h-3 w-4/5" />
+        <USkeleton class="h-3 w-1/2" />
+      </div>
+      <div
+        v-else
+        class="p-4 sm:p-4"
+      >
         <!-- <p
           v-if="category"
           class="font-instrument-sans text-[11px] uppercase tracking-widest text-ink-400"
@@ -114,7 +138,7 @@ const cardUi = computed(() => ({
           v-if="price"
           class="font-instrument-sans font-medium text-sm text-ink-800 mt-3"
         >
-          {{ formattedPrice }}
+          {{ price }}
         </p>
       </div>
     </template>
