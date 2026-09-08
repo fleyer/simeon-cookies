@@ -33,6 +33,12 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    prerender: {
+      failOnError: false,
+    },
+  },
+
   runtimeConfig: {
     public: {
       shopifyStoreDomain: process.env.NUXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? 'mock.shop',
