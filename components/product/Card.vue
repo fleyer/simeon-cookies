@@ -59,7 +59,7 @@ const cardUi = computed(() => ({
           :src="image"
           :alt="imageAlt ?? title"
           format="webp"
-          class="w-full h-full object-contain object-center transition-transform duration-[400ms] ease-out group-hover/card:scale-[1.03]"
+          class="w-full h-full object-cover object-center transition-transform duration-[400ms] ease-out group-hover/card:scale-[1.03]"
           :style="isSoldout ? { filter: 'brightness(0.75) grayscale(30%)' } : undefined"
         />
         <UBadge
