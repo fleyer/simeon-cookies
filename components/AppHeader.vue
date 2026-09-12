@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { header } from '~/content/fr/header'
 
+const route = useRoute()
+const isHomePage = computed(() => route.path === '/')
+
 const scrollY = useScrollY()
 const bgOpacity = computed(() => Math.min(scrollY.value / 300, 1))
 const isScrolled = computed(() => scrollY.value > 80)
-const logoTranslateY = computed(() => Math.max(8 * (1 - scrollY.value / 300), 0))
+const logoOpacity = computed(() => isHomePage.value ? bgOpacity.value : 1)
+const logoTranslateY = computed(() => isHomePage.value ? Math.max(8 * (1 - scrollY.value / 300), 0) : 0)
 
 const mobileOpen = ref(false)
 const cartCount = ref(0)
@@ -23,6 +27,7 @@ const navItems = [
     :style="{
       '--header-bg-opacity': bgOpacity,
       '--header-logo-translate-y': `${logoTranslateY}px`,
+      '--header-logo-opacity': logoOpacity,
     }"
   >
     <UHeader
@@ -129,7 +134,7 @@ const navItems = [
 }
 
 :deep(.header-logo-animation) {
-  opacity: var(--header-bg-opacity);
+  opacity: var(--header-logo-opacity);
   transform: translateY(var(--header-logo-translate-y));
 }
 
