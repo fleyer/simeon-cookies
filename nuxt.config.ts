@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     public: {
       shopifyStoreDomain: process.env.NUXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? 'mock.shop',
       shopifyStorefrontToken: process.env.NUXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN ?? 'mock-token',
-      shopifyApiVersion: '2025-01',
+      shopifyApiVersion: '2026-04',
     },
   },
 })

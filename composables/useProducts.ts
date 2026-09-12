@@ -88,12 +88,27 @@ function mapProduct(node: any): CatalogProduct {
 }
 
 export const useProducts = () => {
-  const { data, pending, error, refresh } = useAsyncData('shopify-catalog', async () => {
-    const client = useShopify()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: result } = await client.request(CATALOG_QUERY, { variables: { first: 50 } }) as any
-    return (result.products.nodes as unknown[]).map(mapProduct)
-  })
+  const { data, pending, error, refresh } = useAsyncData(
+    'shopify-catalog',
+    async () => {
+      const client = useShopify()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: result } = await client.request(CATALOG_QUERY, { variables: { first: 50 } }) as any
+      return (result.products.nodes as unknown[]).map(mapProduct)
+    },
+    {
+      // The site is statically generated, so anything fetched at build time would
+      // freeze stock/availability into the HTML. Skip prerendering this request and
+      // always fetch in the browser so the catalog reflects live Shopify inventory.
+      server: false,
+      // Don't block hydration on the fetch. Without this, the non-lazy resolve races
+      // hydration and the server/client DOM diverge (hydration mismatch). With lazy,
+      // both server and first client render show `pending`, then the client resolves.
+      lazy: true,
+      // Ignore the cached payload on client-side navigation too — refetch every visit.
+      getCachedData: () => undefined,
+    },
+  )
 
   return {
     products: computed(() => data.value ?? []),
