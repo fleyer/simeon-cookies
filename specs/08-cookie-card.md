@@ -65,12 +65,12 @@ Built on `UCard` by default. The root component can be swapped via the `as` prop
 
 The `link` prop is passed as `:to` directly on the root component (`UCard` or the component passed via `as`), which renders as a `NuxtLink` internally. There is no separate wrapping link element.
 
-Hover state on the root component is intended to trigger both the image scale and any lift effect (see [Known Gaps / TODO](#known-gaps--todo) — the scale transition is not currently wired up to a hover trigger).
+Hover state on the root component triggers the image scale via a `group/card` class on the root component (see [Known Gaps / TODO](#known-gaps--todo) for the remaining lift-effect gap).
 
 ### Image (UCard `#header` slot)
 
-- Square aspect ratio (`aspect-square`)
-- `NuxtImg` with `object-cover object-center`, `format="webp"`
+- Square aspect ratio (`aspect-square`), clipped with `overflow-hidden`
+- `NuxtImg` with `object-contain object-center`, `format="webp"`, so source images of any dimension are centered and never overflow or get cropped
 - No border radius (`rounded-none` override on the card header)
 - Subtle hover: image scales to `scale-[1.03]`, transition 400ms ease-out
 - When `status === 'soldout'`: add `brightness-75 grayscale-[30%]` filter on the image
@@ -232,7 +232,7 @@ Rendered as a `UPageCard` inside a `UPageGrid` (e.g. homepage "featured" section
 
 Tracked against the current implementation in `components/product/Card.vue`.
 
-- [ ] **Hover scale is not wired up.** The image has `group-hover/card:scale-[1.03]`, but no ancestor in the template carries a `group/card` class, so the scale transition never triggers. Needs a `group/card` class on the root `<component>`.
+- [x] ~~**Hover scale is not wired up.**~~ Implemented: the root `<component>` now carries a `group/card` class, so `group-hover/card:scale-[1.03]` on the image triggers correctly.
 - [ ] **No lift effect on hover.** Spec calls for a hover lift on the card/root; not implemented at all yet (box-shadow or translate on hover).
 - [ ] **No explicit `aria-label`** on the root link when the card has no other focusable element (e.g. no CTA). Currently relies on `UCard`/`UPageCard`/`NuxtLink` defaults.
 - [x] ~~**Featured `ring-ink-300` border not implemented.**~~ Implemented: `status="featured"` now adds `ring-1 ring-ink-300` on the root component, overriding `UCard`'s default `ring-default` color.

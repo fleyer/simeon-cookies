@@ -28,11 +28,12 @@ const { badgeConfig, formattedRating, stars, isSoldout } = useProduct({
 
 const cardUi = computed(() => ({
   root: [
-    'overflow-hidden rounded-none bg-transparent',
+    'min-w-0 w-full overflow-hidden rounded-none',
     props.status === 'featured' ? 'ring-2 ring-peach-300' : '',
   ].join(' '),
-  container: 'p-0 sm:p-0 gap-0',
-  header: 'p-0 px-0 sm:px-0',
+  container: 'min-w-0 w-full p-0 sm:p-0 gap-0',
+  wrapper: 'min-w-0 w-full items-stretch',
+  header: 'min-w-0 w-full p-0 px-0 sm:px-0',
   body: 'pt-3',
   footer: 'w-full'
 }))
@@ -43,6 +44,7 @@ const cardUi = computed(() => ({
     :is="as ?? UCard"
     :ui="cardUi"
     :to="loading ? undefined : link"
+    class="group/card"
   >
     <template #header>
       <USkeleton
@@ -51,13 +53,13 @@ const cardUi = computed(() => ({
       />
       <div
         v-else
-        class="relative aspect-square overflow-hidden"
+        class="relative aspect-square w-full min-w-0 overflow-hidden flex items-center justify-center"
       >
         <NuxtImg
           :src="image"
           :alt="imageAlt ?? title"
           format="webp"
-          class="w-full h-full object-cover object-center transition-transform duration-[400ms] ease-out group-hover/card:scale-[1.03]"
+          class="w-full h-full object-contain object-center transition-transform duration-[400ms] ease-out group-hover/card:scale-[1.03]"
           :style="isSoldout ? { filter: 'brightness(0.75) grayscale(30%)' } : undefined"
         />
         <UBadge
