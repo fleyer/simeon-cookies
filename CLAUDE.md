@@ -8,7 +8,7 @@
 - **Rendering**: Static site generation (`nuxt generate`)
 - **Shopify**: `@shopify/storefront-api-client` (framework-agnostic Storefront API client)
   - Use `mock.shop` as the Shopify endpoint during development
-- **Deployment**: GitHub Pages via GitHub Actions
+- **Deployment**: Cloudflare Pages via GitHub Actions (`.github/workflows/deploy.yml` builds with `nuxt generate` then deploys with `cloudflare/pages-action`)
 
 ## Rules
 
@@ -36,7 +36,7 @@ bun run lint       # Run ESLint
 ├── public/          # Files served as-is
 └── .github/
     └── workflows/
-        └── deploy.yml  # GitHub Pages deployment
+        └── deploy.yml  # Cloudflare Pages deployment
 ```
 
 ## Implementation Status
