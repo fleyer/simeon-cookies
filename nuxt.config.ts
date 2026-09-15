@@ -33,6 +33,10 @@ export default defineNuxtConfig({
     }
   },
 
+  ui: {
+    colorMode: false
+  },
+
   nitro: {
     prerender: {
       failOnError: false,
