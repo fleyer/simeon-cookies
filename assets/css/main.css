@@ -39,6 +39,8 @@
   --ui-primary: var(--ui-color-primary-400);
   /* Warm cream background */
   --ui-bg: #fbf2e9;
+  --inset: 0px !important;
+
 }
 
 @layer base {
@@ -48,7 +50,7 @@
     @apply cursor-pointer;
     @apply disabled:cursor-not-allowed;
   }
-  
+
   h2 {
     @apply text-3xl font-bold text-center
   }

@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "@nuxt/image": "2.0.0",
-    "@nuxt/ui": "^4.9.0",
+    "@nuxt/ui": "^4.11.1",
     "@pinia/nuxt": "1.0.2",
     "@shopify/storefront-api-client": "1.0.10",
     "motion-v": "2.3.0",
-    "nuxt": "4.4.8",
+    "nuxt": "4.5.2",
     "pinia": "4.0.3"
   },
   "devDependencies": {
