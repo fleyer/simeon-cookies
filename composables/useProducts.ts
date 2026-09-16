@@ -10,6 +10,7 @@ export interface CatalogProduct {
   image: string
   imageAlt: string
   price: string
+  unitPrice: number
   status: ProductStatus | undefined
   link: string
 }
@@ -82,6 +83,7 @@ function mapProduct(node: any): CatalogProduct {
     image: node.featuredImage?.url ?? '',
     imageAlt: node.featuredImage?.altText || node.title,
     price: formatPrice(amount, currencyCode),
+    unitPrice: parseFloat(amount),
     status: resolveStatus(node.availableForSale, node.variants.nodes, node.tags),
     link: `/cookies/${node.handle}`,
   }

@@ -30,6 +30,7 @@ export const useLocalProducts = () => {
       image: product.image ?? '',
       imageAlt: product.imageAlt,
       price: product.price !== undefined ? formatPrice(product.price) : '',
+      unitPrice: product.price ?? 0,
       status: product.status,
       link: `/cookies/${handle}`,
     }

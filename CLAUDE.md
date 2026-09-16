@@ -56,11 +56,12 @@ bun run test       # Run Playwright e2e tests (tests/)
 | Homepage | `pages/index.vue` | ✅ Built — renders HeroTriptych only |
 | Order | `pages/order/index.vue` | ✅ Built — catalog grid with "Ajouter au panier" wired to `useCartStore().addItem`; sold-out products disable the button |
 
-### Cart (v1 — state only, see [specs/04a-cart-v1-state.md](specs/04a-cart-v1-state.md))
+### Cart (see [specs/04a-cart-v1-state.md](specs/04a-cart-v1-state.md), [specs/04b-cart-v2-ui.md](specs/04b-cart-v2-ui.md))
 | Piece | File | Status | Notes |
 |-------|------|--------|-------|
-| Store | `stores/cart.ts` | ✅ Built | Pinia setup store; persists `items` to `localStorage` manually (no persistedstate plugin) via a client-only `watch`, deferred to `onNuxtReady` to avoid Nuxt/Pinia's SSR-payload hydration clobbering the localStorage read |
-| No cart drawer/UI yet | — | Out of scope | Deferred to v2 (`specs/04-cart.md`) |
+| Store | `stores/cart.ts` | ✅ Built | Pinia setup store; persists `items` to `localStorage` manually (no persistedstate plugin) via a client-only `watch`, deferred to `onNuxtReady` to avoid Nuxt/Pinia's SSR-payload hydration clobbering the localStorage read; also holds `isOpen`/`open`/`close`, `updateQuantity`, `removeItem`, and a `subtotal` computed off each item's numeric `unitPrice` |
+| Drawer | `components/CartDrawer.vue`, `components/cart/CartLineItem.vue`, `components/cart/CartEmptyState.vue` | ✅ Built | Nuxt UI `UDrawer` with `direction="right"`; full-screen on mobile via a `ui.content` override (`w-screen h-dvh` below `sm`, fixed 420px above); mounted once in `AppHeader.vue`, opened by the header cart button |
+| Deferred from `04-cart.md` | — | Not built | Quantity-removal undo window, "item added" highlight animation, out-of-stock row state, free-shipping threshold, auto-open on add |
 
 ### Fonts
 Loaded via Google Fonts in `nuxt.config.ts` `app.head`. Tailwind classes available: `font-fraunces`, `font-lora`, `font-instrument-sans`.

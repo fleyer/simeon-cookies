@@ -10,8 +10,8 @@ function toCardProps({ id: _id, handle: _handle, ...rest }: CatalogProduct) {
   return rest
 }
 
-function toCartItem({ id, handle, title, image, imageAlt, price }: CatalogProduct) {
-  return { id, handle, title, image, imageAlt, price }
+function toCartItem({ id, handle, title, image, imageAlt, price, unitPrice }: CatalogProduct) {
+  return { id, handle, title, image, imageAlt, price, unitPrice }
 }
 
 </script>

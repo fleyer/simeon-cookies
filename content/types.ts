@@ -27,6 +27,25 @@ export interface TriptychContent {
   }
 }
 
+export interface CartContent {
+  heading: string
+  empty: {
+    title: string
+    subtitle: string
+    link: string
+  }
+  summary: {
+    subtotalLabel: string
+    shippingNote: string
+  }
+  checkoutButton: string
+  continueShoppingLink: string
+  removeAriaLabel: string
+  decreaseAriaLabel: string
+  increaseAriaLabel: string
+  closeAriaLabel: string
+}
+
 export interface ProductCardContent {
   badges: Record<'new' | 'featured' | 'soldout' | 'popular' | 'available', string>
   ratingLabel: (rating: string) => string
