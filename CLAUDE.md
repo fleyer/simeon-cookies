@@ -5,6 +5,7 @@
 - **Runtime & Package Manager**: Bun
 - **Framework**: Nuxt 3 (Vue 3) with TypeScript
 - **UI Library**: Nuxt UI v4 (`@nuxt/ui`) — use its components (UButton, UCard, etc.) and Tailwind CSS theming
+- **State**: Pinia (`@pinia/nuxt`), setup-store syntax — see `stores/`
 - **Rendering**: Static site generation (`nuxt generate`)
 - **Shopify**: `@shopify/storefront-api-client` (framework-agnostic Storefront API client)
   - Use `mock.shop` as the Shopify endpoint during development
@@ -23,6 +24,7 @@ bun run dev        # Start dev server
 bun run generate   # Build static site
 bun run typecheck  # Run vue-tsc
 bun run lint       # Run ESLint
+bun run test       # Run Playwright e2e tests (tests/)
 ```
 
 ## Project Structure
@@ -44,13 +46,21 @@ bun run lint       # Run ESLint
 ### Components
 | Component | File | Status | Notes |
 |-----------|------|--------|-------|
-| Header | `components/AppHeader.vue` | ✅ Built | Fixed, sticky; transparent on homepage hero, solid Cream elsewhere; mobile drawer; cart badge placeholder |
+| Header | `components/AppHeader.vue` | ✅ Built | Fixed, sticky; transparent on homepage hero, solid Cream elsewhere; mobile drawer; cart badge wired to `useCartStore().totalCount` |
 | Hero triptych | `components/HeroTriptych.vue` | ✅ Built | Real images from `public/cookies/hero/`; image source (Shopify vs content module) TBD |
+| Product card | `components/product/Card.vue` | ✅ Built | Used on `/order`; whole card is a stretched link to the product page — interactive content in slots (e.g. the footer button) needs `relative z-10` to stay clickable above the link overlay |
 
 ### Pages
 | Page | File | Status |
 |------|------|--------|
 | Homepage | `pages/index.vue` | ✅ Built — renders HeroTriptych only |
+| Order | `pages/order/index.vue` | ✅ Built — catalog grid with "Ajouter au panier" wired to `useCartStore().addItem`; sold-out products disable the button |
+
+### Cart (v1 — state only, see [specs/04a-cart-v1-state.md](specs/04a-cart-v1-state.md))
+| Piece | File | Status | Notes |
+|-------|------|--------|-------|
+| Store | `stores/cart.ts` | ✅ Built | Pinia setup store; persists `items` to `localStorage` manually (no persistedstate plugin) via a client-only `watch`, deferred to `onNuxtReady` to avoid Nuxt/Pinia's SSR-payload hydration clobbering the localStorage read |
+| No cart drawer/UI yet | — | Out of scope | Deferred to v2 (`specs/04-cart.md`) |
 
 ### Fonts
 Loaded via Google Fonts in `nuxt.config.ts` `app.head`. Tailwind classes available: `font-fraunces`, `font-lora`, `font-instrument-sans`.

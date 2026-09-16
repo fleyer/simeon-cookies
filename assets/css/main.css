@@ -42,6 +42,13 @@
 }
 
 @layer base {
+
+  button,
+  [role="button"] {
+    @apply cursor-pointer;
+    @apply disabled:cursor-not-allowed;
+  }
+  
   h2 {
     @apply text-3xl font-bold text-center
   }

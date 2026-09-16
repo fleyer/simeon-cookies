@@ -11,7 +11,8 @@ const logoOpacity = computed(() => isHomePage.value ? bgOpacity.value : 1)
 const logoTranslateY = computed(() => isHomePage.value ? Math.max(8 * (1 - scrollY.value / 300), 0) : 0)
 
 const mobileOpen = ref(false)
-const cartCount = ref(0)
+const cartStore = useCartStore()
+const cartCount = computed(() => cartStore.totalCount)
 
 const navItems = [
   { label: header.nav.cookies, to: '/order', class: 'text-peach-600 rounded-full border-solid border-1' },
@@ -85,6 +86,7 @@ const navItems = [
           <Transition name="badge-pop">
             <span
               v-if="cartCount > 0"
+              data-testid="cart-badge"
               class="absolute z-10 -top-1.5 -right-1.5 bg-[#1A0F0A] text-[#FAF7F2] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
             >
               {{ cartCount }}

@@ -4,11 +4,17 @@ import { order } from '~/content/fr/order'
 import type { CatalogProduct } from '~/composables/useProducts'
 
 const { products, pending, error, refresh } = useProducts()
+const cartStore = useCartStore()
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toCardProps({ id, handle, ...rest }: CatalogProduct) {
   return rest
 }
+
+function toCartItem({ id, handle, title, image, imageAlt, price }: CatalogProduct) {
+  return { id, handle, title, image, imageAlt, price }
+}
+
 </script>
 
 <template>
@@ -65,8 +71,11 @@ function toCardProps({ id, handle, ...rest }: CatalogProduct) {
           :as="UPageCard"
         >
           <template #footer>
-            <div class="w-full flex justify-end items-center p-2">
-              <UButton variant="solid">
+            <div class="relative z-10 w-full flex justify-end items-center p-2">
+              <UButton
+                variant="solid"
+                @click="cartStore.addItem(toCartItem(product))"
+              >
                 {{ order.product.orderButton }}
               </UButton>
             </div>

@@ -4,7 +4,7 @@ export const order = {
   heading: 'Nos cookies',
 
   product: {
-    orderButton: "Ajouter"
+    orderButton: "Ajouter au panier"
   },
 
   currency: "euros",

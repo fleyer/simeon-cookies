@@ -3,6 +3,10 @@
 .output/
 dist/
 
+# Playwright
+test-results/
+playwright-report/
+
 # Dependencies
 node_modules/
 
