@@ -6,8 +6,7 @@ import type { CatalogProduct } from '~/composables/useProducts'
 const { products, pending, error, refresh } = useProducts()
 const cartStore = useCartStore()
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function toCardProps({ id, handle, ...rest }: CatalogProduct) {
+function toCardProps({ id: _id, handle: _handle, ...rest }: CatalogProduct) {
   return rest
 }
 
