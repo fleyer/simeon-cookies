@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ComponentProps } from '#build/types/layouts';
+import type { ComponentProps } from 'vue-component-type-helpers';
 import { UPageCard } from '#components';
 import type Card from '../product/Card.vue';
 
