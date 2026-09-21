@@ -1,6 +1,6 @@
 # Spec: Order — Product Catalog
 
-**Status**: Draft
+**Status**: Implemented — `pages/order/index.vue`
 **Route**: `/order`
 **Related**: [02-homepage.md](02-homepage.md), [02a-hero-ctas.md](02a-hero-ctas.md), [08-cookie-card.md](08-cookie-card.md), [04-cart.md](04-cart.md)
 

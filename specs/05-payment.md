@@ -1,6 +1,6 @@
 # Spec: Payment
 
-**Status**: Draft  
+**Status**: Implemented (checkout entry point) — `stores/cart.ts` (`checkout` action), `components/CartDrawer.vue`; Shopify admin checkout configuration (branding, payment methods, CGV link, etc.) not done, owned outside the codebase  
 **Route**: Shopify-hosted checkout (external) / or `/checkout` if custom
 
 ---

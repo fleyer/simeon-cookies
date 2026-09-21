@@ -13,6 +13,7 @@ export interface CatalogProduct {
   unitPrice: number
   status: ProductStatus | undefined
   link: string
+  variantId: string | undefined
 }
 
 const CATALOG_QUERY = `
@@ -31,7 +32,7 @@ const CATALOG_QUERY = `
           minVariantPrice { amount currencyCode }
         }
         variants(first: 10) {
-          nodes { availableForSale quantityAvailable }
+          nodes { id availableForSale quantityAvailable }
         }
         subtitle: metafield(namespace: "custom", key: "subtitle") { value }
       }
@@ -72,6 +73,7 @@ function extractSubtitle(description: string): string {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapProduct(node: any): CatalogProduct {
   const { amount, currencyCode } = node.priceRange.minVariantPrice
+  const variants = node.variants.nodes as Array<{ id: string; availableForSale: boolean; quantityAvailable: number | null }>
 
   return {
     id: node.id,
@@ -84,8 +86,9 @@ function mapProduct(node: any): CatalogProduct {
     imageAlt: node.featuredImage?.altText || node.title,
     price: formatPrice(amount, currencyCode),
     unitPrice: parseFloat(amount),
-    status: resolveStatus(node.availableForSale, node.variants.nodes, node.tags),
+    status: resolveStatus(node.availableForSale, variants, node.tags),
     link: `/cookies/${node.handle}`,
+    variantId: (variants.find((v) => v.availableForSale) ?? variants[0])?.id,
   }
 }
 

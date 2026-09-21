@@ -39,6 +39,7 @@ export interface CartContent {
     shippingNote: string
   }
   checkoutButton: string
+  checkoutError: string
   continueShoppingLink: string
   removeAriaLabel: string
   decreaseAriaLabel: string

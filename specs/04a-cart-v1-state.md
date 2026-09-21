@@ -1,6 +1,6 @@
 # Spec: Cart — v1 State Layer
 
-**Status**: Draft  
+**Status**: Implemented — `stores/cart.ts`  
 **Depends on**: [04-cart.md](04-cart.md) (full cart UX, tackled in v2)  
 **Scope**: Pinia store · localStorage persistence · "Add to cart" on order page · header badge count
 

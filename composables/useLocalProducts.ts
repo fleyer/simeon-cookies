@@ -33,6 +33,7 @@ export const useLocalProducts = () => {
       unitPrice: product.price ?? 0,
       status: product.status,
       link: `/cookies/${handle}`,
+      variantId: undefined,
     }
   })
 

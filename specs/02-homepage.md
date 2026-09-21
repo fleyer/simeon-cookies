@@ -1,6 +1,6 @@
 # Spec: Homepage
 
-**Status**: Draft  
+**Status**: Implemented (minimal) — `pages/index.vue` renders HeroTriptych only  
 **Route**: `/`
 
 ---

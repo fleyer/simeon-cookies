@@ -12,6 +12,7 @@ export const cart = {
     shippingNote: "Livraison calculée à l'étape suivante",
   },
   checkoutButton: 'Valider le panier',
+  checkoutError: "Impossible d'accéder au paiement. Veuillez réessayer.",
   continueShoppingLink: 'Continuer mes achats',
   removeAriaLabel: "Retirer l'article",
   decreaseAriaLabel: 'Diminuer la quantité',

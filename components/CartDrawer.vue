@@ -63,6 +63,12 @@ const formattedSubtotal = computed(() =>
       <p class="font-lora text-xs text-ink-500">
         {{ cart.summary.shippingNote }}
       </p>
+      <p
+        v-if="cartStore.checkoutError"
+        class="font-instrument-sans text-xs text-error"
+      >
+        {{ cart.checkoutError }}
+      </p>
 
       <UButton
         :label="cart.checkoutButton"
@@ -70,8 +76,10 @@ const formattedSubtotal = computed(() =>
         variant="solid"
         block
         size="lg"
+        :loading="cartStore.isCheckingOut"
+        :disabled="cartStore.isCheckingOut"
         class="font-fraunces font-semibold justify-center mt-2"
-        @click="cartStore.close()"
+        @click="cartStore.checkout()"
       />
       <UButton
         :label="cart.continueShoppingLink"

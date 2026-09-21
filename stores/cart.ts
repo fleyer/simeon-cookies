@@ -7,7 +7,23 @@ export interface CartItem {
   price: string
   unitPrice: number
   quantity: number
+  variantId: string | undefined
 }
+
+const CART_CREATE_MUTATION = `
+  mutation CartCreate($lines: [CartLineInput!]!) {
+    cartCreate(input: { lines: $lines }) {
+      cart {
+        id
+        checkoutUrl
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`
 
 const STORAGE_KEY = 'cart'
 
@@ -24,6 +40,8 @@ function sanitizeItem(item: CartItem): CartItem {
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
   const isOpen = ref(false)
+  const isCheckingOut = ref(false)
+  const checkoutError = ref(false)
 
   if (import.meta.client) {
     // Nuxt's Pinia module re-hydrates store state from the SSR payload on
@@ -84,9 +102,41 @@ export const useCartStore = defineStore('cart', () => {
     isOpen.value = false
   }
 
+  async function checkout() {
+    checkoutError.value = false
+    isCheckingOut.value = true
+
+    try {
+      const client = useShopify()
+      const lines = items.value
+        .filter((item): item is CartItem & { variantId: string } => Boolean(item.variantId))
+        .map((item) => ({ merchandiseId: item.variantId, quantity: item.quantity }))
+
+      const { data, errors } = await client.request(CART_CREATE_MUTATION, {
+        variables: { lines },
+      })
+
+      const userErrors = data?.cartCreate?.userErrors ?? []
+      const checkoutUrl = data?.cartCreate?.cart?.checkoutUrl
+
+      if (errors || userErrors.length || !checkoutUrl) {
+        checkoutError.value = true
+        isCheckingOut.value = false
+        return
+      }
+
+      window.location.href = checkoutUrl
+    } catch {
+      checkoutError.value = true
+      isCheckingOut.value = false
+    }
+  }
+
   return {
     items,
     isOpen,
+    isCheckingOut,
+    checkoutError,
     totalCount,
     subtotal,
     addItem,
@@ -94,5 +144,6 @@ export const useCartStore = defineStore('cart', () => {
     removeItem,
     open,
     close,
+    checkout,
   }
 })

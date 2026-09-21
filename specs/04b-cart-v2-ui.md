@@ -1,6 +1,6 @@
 # Spec: Cart — v2 Drawer UI
 
-**Status**: Draft
+**Status**: Implemented — `components/CartDrawer.vue`, `components/cart/CartLineItem.vue`, `components/cart/CartEmptyState.vue`; deferred items (undo window, highlight animation, out-of-stock row state, free-shipping threshold, auto-open on add) not built
 **Depends on**: [04-cart.md](04-cart.md) (full cart UX reference — layout, copy, colors, animation timings all defined there), [04a-cart-v1-state.md](04a-cart-v1-state.md) (store, persistence, header badge — already built)
 **Scope**: The cart drawer component itself — open/close, line item list with quantity edit + delete, summary, checkout CTA
 

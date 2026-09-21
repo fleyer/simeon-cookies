@@ -1,6 +1,6 @@
 # Spec: Cart
 
-**Status**: Draft  
+**Status**: Implemented (v1 state + v2 UI, see [04a-cart-v1-state.md](04a-cart-v1-state.md), [04b-cart-v2-ui.md](04b-cart-v2-ui.md)) — some deferred items not built, see those specs  
 **Type**: Slide-in drawer (not a separate page)
 
 ---

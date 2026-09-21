@@ -1,6 +1,6 @@
 # Spec: Header
 
-**Status**: Draft  
+**Status**: Implemented — `components/AppHeader.vue`  
 **Scope**: Global — appears on every page
 
 ---
