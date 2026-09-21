@@ -38,6 +38,13 @@ export default defineNuxtConfig({
     colorMode: false
   },
 
+  image: {
+    // Static generate (nuxt generate) has no server to run the IPX
+    // image endpoint at request time, so `/_ipx/...` 404s in production
+    // (Cloudflare Pages). Serve original files instead of transforming.
+    provider: 'none',
+  },
+
   nitro: {
     prerender: {
       failOnError: false,
