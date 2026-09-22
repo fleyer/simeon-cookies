@@ -54,7 +54,9 @@ const navItems = [
         >
           <NuxtImg
             src="/Simeon.png"
+            width="40"
             height="40"
+            class="h-10 w-auto"
           />
         </NuxtLink>
       </template>
