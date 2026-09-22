@@ -1,5 +1,19 @@
 import type { ProductStatus } from '~/content/types'
 
+export interface ProductVariant {
+  id: string
+  title: string
+  availableForSale: boolean
+  price: string
+  unitPrice: number
+  selectedOptions: { name: string; value: string }[]
+}
+
+export interface ProductOption {
+  name: string
+  values: string[]
+}
+
 export interface CatalogProduct {
   id: string
   handle: string
@@ -14,6 +28,8 @@ export interface CatalogProduct {
   status: ProductStatus | undefined
   link: string
   variantId: string | undefined
+  options: ProductOption[]
+  variants: ProductVariant[]
 }
 
 const CATALOG_QUERY = `
@@ -31,8 +47,19 @@ const CATALOG_QUERY = `
         priceRange {
           minVariantPrice { amount currencyCode }
         }
+        options {
+          name
+          values
+        }
         variants(first: 10) {
-          nodes { id availableForSale quantityAvailable }
+          nodes {
+            id
+            title
+            availableForSale
+            quantityAvailable
+            price { amount currencyCode }
+            selectedOptions { name value }
+          }
         }
         subtitle: metafield(namespace: "custom", key: "subtitle") { value }
       }
@@ -70,10 +97,20 @@ function extractSubtitle(description: string): string {
   return description.split(/[.!?]/)[0]?.trim() ?? ''
 }
 
+interface RawVariant {
+  id: string
+  title: string
+  availableForSale: boolean
+  quantityAvailable: number | null
+  price: { amount: string; currencyCode: string }
+  selectedOptions: { name: string; value: string }[]
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapProduct(node: any): CatalogProduct {
   const { amount, currencyCode } = node.priceRange.minVariantPrice
-  const variants = node.variants.nodes as Array<{ id: string; availableForSale: boolean; quantityAvailable: number | null }>
+  const variants = node.variants.nodes as RawVariant[]
+  const defaultVariant = variants.find((v) => v.availableForSale) ?? variants[0]
 
   return {
     id: node.id,
@@ -88,7 +125,16 @@ function mapProduct(node: any): CatalogProduct {
     unitPrice: parseFloat(amount),
     status: resolveStatus(node.availableForSale, variants, node.tags),
     link: `/cookies/${node.handle}`,
-    variantId: (variants.find((v) => v.availableForSale) ?? variants[0])?.id,
+    variantId: defaultVariant?.id,
+    options: (node.options ?? []) as ProductOption[],
+    variants: variants.map((v) => ({
+      id: v.id,
+      title: v.title,
+      availableForSale: v.availableForSale && (v.quantityAvailable ?? 0) > 0,
+      price: formatPrice(v.price.amount, v.price.currencyCode),
+      unitPrice: parseFloat(v.price.amount),
+      selectedOptions: v.selectedOptions,
+    })),
   }
 }
 

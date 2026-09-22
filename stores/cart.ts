@@ -8,6 +8,7 @@ export interface CartItem {
   unitPrice: number
   quantity: number
   variantId: string | undefined
+  variantTitle?: string
 }
 
 const CART_CREATE_MUTATION = `
@@ -26,6 +27,13 @@ const CART_CREATE_MUTATION = `
 `
 
 const STORAGE_KEY = 'cart'
+
+// Two different variants of the same product must form separate cart lines,
+// so a line is identified by its variant when it has one, falling back to
+// the product id for any line without a variant (e.g. non-Shopify items).
+function lineKey(item: Pick<CartItem, 'id' | 'variantId'>): string {
+  return item.variantId ?? item.id
+}
 
 // Cart items persisted before `unitPrice` was introduced (or corrupted in
 // some other way) would otherwise carry `unitPrice: undefined` into the
@@ -72,7 +80,7 @@ export const useCartStore = defineStore('cart', () => {
   )
 
   function addItem(product: Omit<CartItem, 'quantity'>) {
-    const existing = items.value.find((i) => i.id === product.id)
+    const existing = items.value.find((i) => lineKey(i) === lineKey(product))
     if (existing) {
       existing.quantity++
     } else {
@@ -81,7 +89,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function updateQuantity(id: string, quantity: number) {
-    const item = items.value.find((i) => i.id === id)
+    const item = items.value.find((i) => lineKey(i) === id)
     if (!item) return
     if (quantity <= 0) {
       removeItem(id)
@@ -91,7 +99,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function removeItem(id: string) {
-    items.value = items.value.filter((i) => i.id !== id)
+    items.value = items.value.filter((i) => lineKey(i) !== id)
   }
 
   function open() {

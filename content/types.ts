@@ -12,6 +12,19 @@ export interface HeaderContent {
   }
 }
 
+export interface FooterContent {
+  wordmark: string
+  address: string
+  nav: {
+    cookies: string
+    resellers: string
+    about: string
+  }
+  legal: string[]
+  copyright: string
+  strapline: string
+}
+
 export interface TriptychContent {
   desktop: {
     title: string

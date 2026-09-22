@@ -6,16 +6,18 @@ const props = defineProps<{ item: CartItem }>()
 
 const cartStore = useCartStore()
 
+const lineKey = computed(() => props.item.variantId ?? props.item.id)
+
 function decrease() {
-  cartStore.updateQuantity(props.item.id, props.item.quantity - 1)
+  cartStore.updateQuantity(lineKey.value, props.item.quantity - 1)
 }
 
 function increase() {
-  cartStore.updateQuantity(props.item.id, props.item.quantity + 1)
+  cartStore.updateQuantity(lineKey.value, props.item.quantity + 1)
 }
 
 function remove() {
-  cartStore.removeItem(props.item.id)
+  cartStore.removeItem(lineKey.value)
 }
 </script>
 
@@ -39,6 +41,13 @@ function remove() {
       >
         {{ item.title }}
       </NuxtLink>
+
+      <p
+        v-if="item.variantTitle"
+        class="font-instrument-sans text-xs text-ink-500"
+      >
+        {{ item.variantTitle }}
+      </p>
 
       <p class="font-instrument-sans text-[13px] text-ink-500">
         {{ item.price }}

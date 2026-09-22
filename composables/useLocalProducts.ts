@@ -34,6 +34,8 @@ export const useLocalProducts = () => {
       status: product.status,
       link: `/cookies/${handle}`,
       variantId: undefined,
+      options: [],
+      variants: [],
     }
   })
 

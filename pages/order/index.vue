@@ -1,19 +1,50 @@
 <script setup lang="ts">
 import { UPageCard } from '#components'
 import { order } from '~/content/fr/order'
-import type { CatalogProduct } from '~/composables/useProducts'
+import type { CatalogProduct, ProductVariant } from '~/composables/useProducts'
 
 const { products, pending, error, refresh } = useProducts()
 const cartStore = useCartStore()
 
-function toCardProps({ id: _id, handle: _handle, ...rest }: CatalogProduct) {
+function toCardProps({ id: _id, handle: _handle, options: _options, variants: _variants, ...rest }: CatalogProduct) {
   return rest
 }
 
-function toCartItem({ id, handle, title, image, imageAlt, price, unitPrice, variantId }: CatalogProduct) {
-  return { id, handle, title, image, imageAlt, price, unitPrice, variantId }
+const selectedVariants = ref<Record<string, ProductVariant | undefined>>({})
+
+function needsVariantSelection(product: CatalogProduct) {
+  return product.options.length > 0 && product.variants.length > 1
 }
 
+function resolvedVariant(product: CatalogProduct): ProductVariant | undefined {
+  if (!needsVariantSelection(product)) {
+    return product.variants.find((v) => v.id === product.variantId) ?? product.variants[0]
+  }
+  return selectedVariants.value[product.id]
+}
+
+function canAddToCart(product: CatalogProduct) {
+  // Stock is not managed, so availability never disables the button — the
+  // only gate is having a variant resolved when one must be chosen.
+  if (!needsVariantSelection(product)) return true
+  return Boolean(resolvedVariant(product))
+}
+
+function toCartItem(product: CatalogProduct) {
+  const { id, handle, title, image, imageAlt } = product
+  const variant = resolvedVariant(product)
+  return {
+    id,
+    handle,
+    title,
+    image,
+    imageAlt,
+    price: variant?.price ?? product.price,
+    unitPrice: variant?.unitPrice ?? product.unitPrice,
+    variantId: variant?.id ?? product.variantId,
+    variantTitle: needsVariantSelection(product) ? variant?.title : undefined,
+  }
+}
 </script>
 
 <template>
@@ -66,13 +97,22 @@ function toCartItem({ id, handle, title, image, imageAlt, price, unitPrice, vari
           v-for="product in products"
           :key="product.id"
           v-bind="toCardProps(product)"
+          :price="resolvedVariant(product)?.price ?? product.price"
           class="col-span-1 bg-muted"
           :as="UPageCard"
         >
           <template #footer>
-            <div class="relative z-10 w-full flex justify-end items-center p-2">
+            <div class="relative z-10 w-full flex flex-col gap-2 items-end p-2">
+              <ProductVariantSelector
+                v-if="needsVariantSelection(product)"
+                v-model:variant="selectedVariants[product.id]"
+                :options="product.options"
+                :variants="product.variants"
+                class="w-full"
+              />
               <UButton
                 variant="solid"
+                :disabled="!canAddToCart(product)"
                 @click="cartStore.addItem(toCartItem(product))"
               >
                 {{ order.product.orderButton }}
