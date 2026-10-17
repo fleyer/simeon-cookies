@@ -89,7 +89,7 @@ function toCartItem(product: CatalogProduct) {
           :key="product.id"
           v-bind="toCardProps(product)"
           :price="resolvedVariant(product)?.price ?? product.price"
-          class="col-span-1 bg-muted"
+          class="col-span-1 bg-white hover:bg-white"
           :as="UPageCard"
         >
           <template #footer>
