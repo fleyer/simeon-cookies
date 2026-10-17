@@ -73,7 +73,7 @@ function resolveStatus(
   tags: string[],
 ): ProductStatus | undefined {
   const allSoldout =
-    !availableForSale ||
+    !availableForSale &&
     variants.every((v) => !v.availableForSale || (v.quantityAvailable ?? 0) === 0)
 
   if (allSoldout) return 'soldout'
