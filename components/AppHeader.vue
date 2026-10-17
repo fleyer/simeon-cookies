@@ -14,11 +14,11 @@ const mobileOpen = ref(false)
 const cartStore = useCartStore()
 const cartCount = computed(() => cartStore.totalCount)
 
-const navItems = [
-  { label: header.nav.cookies, to: '/order', class: 'text-peach-600 rounded-full border-solid border-1' },
-  { label: header.nav.resellers, to: '/' },
-  { label: header.nav.about, to: '/' },
-]
+const navItems = computed(() => [
+  { label: header.nav.cookies, to: '/order', class: ['text-peach-600 hover:text-peach-600']},
+  { label: header.nav.resellers, to: '/', class: ['text-peach-600 hover:text-peach-600'] },
+  { label: header.nav.about, to: '/', class: ['text-peach-600 hover:text-peach-600'] },
+])
 
 </script>
 
@@ -68,8 +68,9 @@ const navItems = [
         color="neutral"
       >
         <template #item-label="{item}">
-          <div :class="`font-fraunces transition-[font-size,padding] duration-500 opacity-80 ${isScrolled ? 'text-xl' : 'text-xl p-4'}`">
+          <div :class="`relative group/underline font-fraunces text-xl ${isScrolled ? 'p-0' : 'p-4'}`">
             {{ item.label }}
+            <span :class="['absolute','bottom-0','left-0','pt-2','invisible','w-full','border-solid','border-b-1','border-color-peach-500',isScrolled && 'group-hover/underline:visible']" />
           </div>
         </template>
       </UNavigationMenu>
