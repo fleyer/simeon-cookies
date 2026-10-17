@@ -5,7 +5,8 @@ const route = useRoute()
 const isHomePage = computed(() => route.path === '/')
 
 const scrollY = useScrollY()
-const bgOpacity = computed(() => Math.min(scrollY.value / 300, 1))
+const bgOpacity = computed(() => scrollY.value > 0 ? 1 : 0 )
+// const bgOpacity = computed(() => Math.min(scrollY.value / 300, 1))
 const isScrolled = computed(() => scrollY.value > 80)
 const logoOpacity = computed(() => isHomePage.value ? bgOpacity.value : 1)
 const logoTranslateY = computed(() => isHomePage.value ? Math.max(8 * (1 - scrollY.value / 300), 0) : 0)
@@ -39,7 +40,7 @@ const navItems = computed(() => [
       :menu="{ side: 'left', ui: { content: 'bg-[#1A0F0A] w-[280px] shadow-none sm:shadow-none' } }"
       :class="[isScrolled ? 'shadow-sm' : 'shadow-none']"
       :ui="{
-        root: 'app-header fixed inset-x-0 transition-none md:transition-[height,box-shadow] duration-500 backdrop-blur-none md:backdrop-blur-sm',
+        root: 'app-header fixed inset-x-0 transition-none md:transition-[height,box-shadow] duration-500',
         container: 'max-w-6xl px-6 md:px-12',
         center: 'hidden md:flex',
         content: 'md:hidden',
