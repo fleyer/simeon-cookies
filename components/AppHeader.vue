@@ -91,7 +91,7 @@ const navItems = computed(() => [
             <span
               v-if="cartCount > 0"
               data-testid="cart-badge"
-              class="absolute z-10 -top-1.5 -right-1.5 bg-[#1A0F0A] text-[#FAF7F2] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
+              class="absolute z-10 bottom-2 -right-0 bg-[#1A0F0A] text-[#FAF7F2] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
             >
               {{ cartCount }}
             </span>
