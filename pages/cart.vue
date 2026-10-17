@@ -27,10 +27,11 @@ const cartStore = useCartStore()
           <h1 class="font-fraunces font-medium text-[28px] sm:text-[32px] text-ink-800">
             {{ cart.heading }} ({{ cartStore.totalCount }})
           </h1>
-          <div class="mt-4 border-t border-default">
+          <div class="mt-4 cart-list">
             <CartLineItem
               v-for="item in cartStore.items"
               :key="item.variantId ?? item.id"
+              class="cart-item"
               :item="item"
             />
           </div>
@@ -47,3 +48,14 @@ const cartStore = useCartStore()
     </ClientOnly>
   </main>
 </template>
+<style lang="css" scoped>
+.cart-list {
+  & > .cart-item {
+    border-bottom: 1px solid var(--ui-border);
+  }
+  
+  & .cart-item:last-child {
+    border-bottom: none;
+  }
+}
+</style>

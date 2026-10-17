@@ -23,7 +23,7 @@ function remove() {
 
 <template>
   <div
-    class="flex gap-3 py-4 border-b border-default"
+    class="flex gap-3 py-4"
     data-testid="cart-line-item"
     :data-item-id="item.id"
   >
