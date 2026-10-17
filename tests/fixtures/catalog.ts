@@ -14,7 +14,17 @@ const CATALOG_RESPONSE = {
           availableForSale: true,
           featuredImage: { url: 'https://example.com/one.png', altText: 'Cookie One' },
           priceRange: { minVariantPrice: { amount: '3.50', currencyCode: 'EUR' } },
-          variants: { nodes: [{ availableForSale: true, quantityAvailable: 10 }] },
+          options: [],
+          variants: {
+            nodes: [{
+              id: 'gid://shopify/ProductVariant/1',
+              title: 'Default Title',
+              availableForSale: true,
+              quantityAvailable: 10,
+              price: { amount: '3.50', currencyCode: 'EUR' },
+              selectedOptions: [],
+            }],
+          },
           subtitle: { value: 'Delicious' },
         },
         {
@@ -27,7 +37,17 @@ const CATALOG_RESPONSE = {
           availableForSale: true,
           featuredImage: { url: 'https://example.com/two.png', altText: 'Cookie Two' },
           priceRange: { minVariantPrice: { amount: '4.00', currencyCode: 'EUR' } },
-          variants: { nodes: [{ availableForSale: true, quantityAvailable: 10 }] },
+          options: [],
+          variants: {
+            nodes: [{
+              id: 'gid://shopify/ProductVariant/2',
+              title: 'Default Title',
+              availableForSale: true,
+              quantityAvailable: 10,
+              price: { amount: '4.00', currencyCode: 'EUR' },
+              selectedOptions: [],
+            }],
+          },
           subtitle: { value: 'Tasty' },
         },
       ],

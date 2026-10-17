@@ -47,7 +47,6 @@ function sanitizeItem(item: CartItem): CartItem {
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
-  const isOpen = ref(false)
   const isCheckingOut = ref(false)
   const checkoutError = ref(false)
 
@@ -102,14 +101,6 @@ export const useCartStore = defineStore('cart', () => {
     items.value = items.value.filter((i) => lineKey(i) !== id)
   }
 
-  function open() {
-    isOpen.value = true
-  }
-
-  function close() {
-    isOpen.value = false
-  }
-
   async function checkout() {
     checkoutError.value = false
     isCheckingOut.value = true
@@ -142,7 +133,6 @@ export const useCartStore = defineStore('cart', () => {
 
   return {
     items,
-    isOpen,
     isCheckingOut,
     checkoutError,
     totalCount,
@@ -150,8 +140,6 @@ export const useCartStore = defineStore('cart', () => {
     addItem,
     updateQuantity,
     removeItem,
-    open,
-    close,
     checkout,
   }
 })

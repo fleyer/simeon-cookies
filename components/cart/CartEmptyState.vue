@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { cart } from '~/content/fr/cart'
-
-const cartStore = useCartStore()
 </script>
 
 <template>
@@ -20,8 +18,8 @@ const cartStore = useCartStore()
       :label="cart.empty.link"
       variant="link"
       color="primary"
+      to="/order"
       class="mt-2"
-      @click="cartStore.close()"
     />
   </div>
 </template>

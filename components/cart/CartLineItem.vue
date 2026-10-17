@@ -37,7 +37,6 @@ function remove() {
       <NuxtLink
         :to="`/cookies/${item.handle}`"
         class="font-fraunces font-medium text-base text-ink-800 truncate"
-        @click="cartStore.close()"
       >
         {{ item.title }}
       </NuxtLink>

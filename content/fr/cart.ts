@@ -17,5 +17,5 @@ export const cart = {
   removeAriaLabel: "Retirer l'article",
   decreaseAriaLabel: 'Diminuer la quantité',
   increaseAriaLabel: 'Augmenter la quantité',
-  closeAriaLabel: 'Fermer le panier',
+  metaTitle: 'Mon panier — Simeon Cookies',
 } satisfies CartContent

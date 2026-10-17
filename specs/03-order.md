@@ -36,7 +36,7 @@ This used to live as a section on the homepage. It is now a standalone page at `
 
 - **"Ajouter au panier"** — text button with underline, not a filled button. Keeps the page feeling editorial rather than e-commerce generic.
 - Stock is not managed — Shopify availability/quantity is not used to disable the button. The only thing that gates it is variant selection: for a product with multiple variants (see [11-product-variants.md](11-product-variants.md)), the button stays disabled until a variant is chosen; single-variant products are always addable.
-- Clicking "Ajouter au panier" adds the item and opens the cart drawer (see [04-cart.md](04-cart.md)).
+- Clicking "Ajouter au panier" adds the item; the header cart badge updates as feedback. It does not open or navigate to the cart (see [04-cart.md](04-cart.md), [04c-cart-page.md](04c-cart-page.md)).
 - Clicking the card itself (image or title) opens the product detail page (`/cookies/[handle]`) — not yet specced.
 
 ---
@@ -71,7 +71,7 @@ Not in the initial build. A simple tag-based filter (e.g., "Tous / Chocolat / Sa
 
 ### 3. Add-to-cart wiring
 - [ ] Add the "Ajouter au panier" text-underline button per card (outside `<ProductCard>`, per its documented scope)
-- [ ] Wire click → add to cart + open cart drawer (see [04-cart.md](04-cart.md))
+- [ ] Wire click → add to cart (see [04-cart.md](04-cart.md))
 - [ ] Wire card click-through (image/title) — route to `/cookies/[handle]` once the product detail page exists (stub link until then)
 
 ### 4. Page states
@@ -89,5 +89,5 @@ Not in the initial build. A simple tag-based filter (e.g., "Tous / Chocolat / Sa
 
 - Filtering (see Filtering above)
 - Product detail page (`/cookies/[handle]`) — separate spec to come
-- Cart drawer internals — see [04-cart.md](04-cart.md)
+- Cart page internals — see [04-cart.md](04-cart.md)
 - Stock-based disabling / "Me prévenir" — stock is not managed, so this will not be built; the soldout badge on `<ProductCard>` (see [08-cookie-card.md](08-cookie-card.md)) is purely informational and does not affect the add-to-cart button

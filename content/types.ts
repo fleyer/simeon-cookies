@@ -57,7 +57,7 @@ export interface CartContent {
   removeAriaLabel: string
   decreaseAriaLabel: string
   increaseAriaLabel: string
-  closeAriaLabel: string
+  metaTitle: string
 }
 
 export interface ProductCardContent {

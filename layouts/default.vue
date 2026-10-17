@@ -1,9 +1,7 @@
 <template>
   <AppHeader />
   <UPageBody class="w-full mx-auto max-w-6xl min-h-svh pb-0 sm:px-4 sm:px-6 lg:px-12 mt-0">
-    <div vaul-drawer-wrapper>
-      <slot />
-    </div>
+    <slot />
   </UPageBody>
   <AppFooter class="mt-12" />
 </template>

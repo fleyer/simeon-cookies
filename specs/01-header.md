@@ -48,7 +48,7 @@ On smaller viewports (< 768px), center nav collapses into a hamburger that opens
 - Icon: a minimal outlined bag or basket icon (SVG, ~22px)
 - Badge: Espresso-colored circle with white number, appears when cart count > 0
 - Badge disappears (not shown as "0") when cart is empty
-- Clicking opens the cart drawer (see Cart spec)
+- Clicking navigates to the cart page, `/cart` (see Cart spec)
 
 ---
 

@@ -1,7 +1,7 @@
 # Spec: Cart
 
-**Status**: Implemented (v1 state + v2 UI, see [04a-cart-v1-state.md](04a-cart-v1-state.md), [04b-cart-v2-ui.md](04b-cart-v2-ui.md)) — some deferred items not built, see those specs  
-**Type**: Slide-in drawer (not a separate page)
+**Status**: v1 state implemented ([04a-cart-v1-state.md](04a-cart-v1-state.md)); drawer UI ([04b-cart-v2-ui.md](04b-cart-v2-ui.md)) was replaced by a dedicated page — see [04c-cart-page.md](04c-cart-page.md) (Implemented). Some deferred items not built  
+**Type**: Dedicated page at `/cart` (previously a slide-in drawer)
 
 ---
 
@@ -9,59 +9,53 @@
 
 The cart is where intent becomes commitment. It must answer one question without friction: "what am I about to buy, and does it look right?" Then get out of the way.
 
-The cart appears as a drawer so the user never loses their place in the product catalog. They can review, adjust, and proceed — or close and keep browsing.
+The cart is a dedicated page (`/cart`) so it has a URL, works with the back button, and has room to breathe. The user can review, adjust, and proceed — or go back to the catalog and keep browsing.
 
 ---
 
 ## Trigger
 
-The cart drawer opens when:
-- The user clicks the cart icon in the header
-- The user clicks "Ajouter au panier" on any product card (opens automatically after adding)
+The user reaches the cart page by:
+- Clicking the cart icon in the header (a link to `/cart`)
+- Visiting `/cart` directly
 
-It closes when:
-- The user clicks the overlay (the darkened area to the left of the drawer)
-- The user clicks a close button (X) inside the drawer
-- The user clicks "Valider le panier"
+Adding a product does **not** navigate to the cart or open anything; the header badge updates and that is the feedback.
+
+The user leaves the page via:
+- The header navigation / logo / browser back button
+- "Continuer mes achats" (→ `/order`)
+- "Valider le panier" (→ Shopify hosted checkout, see [05-payment.md](05-payment.md))
 
 ---
 
 ## Layout
 
-The drawer slides in from the **right** edge of the viewport.
+Full page below the fixed header. Details (columns, breakpoints, summary card) are in [04c-cart-page.md](04c-cart-page.md).
 
 ```
-[ X ]                   Mon panier
-─────────────────────────────────
-[ img ]  Chocolat noir fleur de sel
-         12,00 € / douzaine
-         [ − ] 1 [ + ]      ✕
-
-[ img ]  Beurre noisette, noix de pécan
-         14,00 € / douzaine
-         [ − ] 2 [ + ]      ✕
-─────────────────────────────────
-         Sous-total          40,00 €
-         Livraison      calculée à l'étape suivante
-─────────────────────────────────
-         [ Valider le panier ]
-         [ Continuer mes achats ]
+Mon panier (3)
+──────────────────────────────┬──────────────────────────
+[ img ]  Chocolat noir fleur  │  Sous-total TTC     40,00 €
+         12,00 € / douzaine   │  Livraison calculée à l'étape
+         [ − ] 1 [ + ]   ✕    │  suivante
+                              │  ─────────────────────────
+[ img ]  Beurre noisette…     │  [ Valider le panier ]
+         14,00 € / douzaine   │  Continuer mes achats
+         [ − ] 2 [ + ]   ✕    │
 ```
 
-- **Width**: 420px on desktop, full-width on mobile (< 480px)
-- **Height**: Full viewport height
-- **Background**: Cream (`#FAF7F2`)
-- **Overlay**: Parchment-tinted dark overlay on the page behind (opacity 60%)
-- The cart scrolls internally if more items than visible area allows
+- **Desktop (≥ lg)**: two columns — line items left, sticky summary card right
+- **Mobile / tablet**: single column — line items, then summary
+- **Background**: site background; summary card in Cream (`#FAF7F2`) with a 1px Biscuit border
+- The page scrolls normally; there is no internal scroll area
 
 ---
 
 ## Header Area
 
-- A small "X" close button, top-right corner of the drawer
-- "Mon panier" heading in Fraunces 500, ~24px
+- "Mon panier" page heading (`<h1>`) in Fraunces 500, ~32px desktop / 28px mobile
 - Item count as a parenthetical: "Mon panier (3)" — updates live
-- These stay fixed at the top as the item list scrolls
+- No close button — it's a page, not an overlay
 
 ---
 
@@ -90,7 +84,7 @@ When tapping − at a quantity of 1, the item doesn't disappear immediately. Ins
 
 ## Summary Area
 
-Fixed at the bottom of the drawer (does not scroll with items):
+Right-hand summary card on desktop (sticky below the header), below the item list on mobile:
 
 - **Sous-total**: Right-aligned, Fraunces 500, 20px. Shows the cart total before shipping. Labeled "Sous-total TTC".
 - **Shipping note**: "Livraison calculée à l'étape suivante" in small Lora, Warm Sand. This line disappears if a free shipping threshold is met (future: configurable).
@@ -111,7 +105,7 @@ Two actions, stacked:
 2. **"Continuer mes achats"** — secondary action
    - Text-only link, centered
    - Instrument Sans, 13px, Espresso
-   - Closes the drawer
+   - Navigates to `/order`
 
 ---
 
@@ -119,20 +113,18 @@ Two actions, stacked:
 
 When the cart has no items:
 
-- The item list area shows a centered empty state:
+- The page body shows a centered empty state:
   - Icon: a minimal outlined bag illustration (SVG)
   - Text: "Votre panier est vide." in Fraunces 400, 20px
   - Subtext: "Allez choisir quelque chose de bon." in Lora 15px
-  - A "Voir nos cookies" link (→ closes drawer, no navigation, since the catalog is already behind it)
+  - A "Voir nos cookies" link (→ `/order`)
 - The summary area and CTAs are hidden in the empty state
 
 ---
 
 ## "Item added" Confirmation
 
-When a user adds an item to cart (from the [order page](03-order.md) or the homepage's Feature Callout), the cart drawer opens automatically and the newly added item briefly highlights:
-- The new row has a 1px Burnt Sienna left border that fades out over 1.5 seconds
-- No toast or popup — the drawer itself is the confirmation
+Adding an item from the [order page](03-order.md) or the homepage's Feature Callout does not open or navigate to the cart. The header badge count (with its pop animation) is the confirmation. (Deferred: a highlight on the new row when the user next visits the cart.)
 
 ---
 
@@ -149,11 +141,10 @@ When a user adds an item to cart (from the [order page](03-order.md) or the home
 
 | Event | Animation |
 |-------|-----------|
-| Drawer open | Slides in from right, 300ms cubic-bezier(0.16, 1, 0.3, 1) |
-| Drawer close | Slides out to right, 250ms ease-in |
-| Overlay | Fades in/out with the drawer |
 | Item removed | Row fades out and collapses in height, 200ms |
-| Item added highlight | Left border in Burnt Sienna fades out, 1.5s |
+| Header badge change | Existing `badge-pop` transition |
+
+No page-level transition beyond Nuxt's default route change.
 
 ---
 

@@ -1,13 +1,13 @@
 # Spec: Payment
 
-**Status**: Implemented (checkout entry point) — `stores/cart.ts` (`checkout` action), `components/CartDrawer.vue`; Shopify admin checkout configuration (branding, payment methods, CGV link, etc.) not done, owned outside the codebase  
+**Status**: Implemented (checkout entry point) — `stores/cart.ts` (`checkout` action), cart UI (`components/CartDrawer.vue` today, moving to `pages/cart.vue` per [04c-cart-page.md](04c-cart-page.md)); Shopify admin checkout configuration (branding, payment methods, CGV link, etc.) not done, owned outside the codebase  
 **Route**: Shopify-hosted checkout (external) / or `/checkout` if custom
 
 ---
 
 ## Approach
 
-Payment is handled by **Shopify's hosted checkout**. When the user clicks "Proceed to checkout" in the cart drawer, they are redirected to Shopify's checkout flow at `[store].myshopify.com/checkouts/...`.
+Payment is handled by **Shopify's hosted checkout**. When the user clicks "Proceed to checkout" on the cart page, they are redirected to Shopify's checkout flow at `[store].myshopify.com/checkouts/...`.
 
 This is the right call because:
 - PCI compliance is handled by Shopify entirely
@@ -23,7 +23,7 @@ This is the right call because:
 ### 1. Checkout Entry Points
 
 All paths into checkout:
-- Cart drawer → "Proceed to checkout" button
+- Cart page → "Proceed to checkout" button
 - (Future) Express checkout buttons (Shop Pay, Apple Pay, Google Pay) directly on product cards
 
 The "Proceed to checkout" button is defined in the Cart spec. No duplicate buttons or accelerated checkout shortcuts in v1.

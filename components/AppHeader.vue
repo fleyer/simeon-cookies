@@ -77,10 +77,10 @@ const navItems = computed(() => [
 
       <template #right>
         <!-- Cart -->
-        <button
+        <NuxtLink
+          to="/cart"
           class="relative group/cart rounded-full p-2 text-ink-800"
           :aria-label="header.cart.ariaLabel"
-          @click="cartStore.open()"
         >
           <span :class="`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white scale-0 group-hover/cart:scale-100 transition-none md:transition-transform duration-300 ease-out size-[30px] ${isScrolled ? '' : 'md:size-[55px]'}`" />
           <UIcon
@@ -96,7 +96,7 @@ const navItems = computed(() => [
               {{ cartCount }}
             </span>
           </Transition>
-        </button>
+        </NuxtLink>
 
         <!-- Hamburger (mobile) -->
         <button
@@ -125,8 +125,6 @@ const navItems = computed(() => [
         </nav>
       </template>
     </UHeader>
-
-    <CartDrawer />
   </div>
 </template>
 

@@ -31,8 +31,8 @@ bun run test       # Run Playwright e2e tests (tests/)
 
 ```
 /
-├── pages/           # Nuxt file-based routing
-├── components/      # Vue components
+├── pages/           # Nuxt file-based routing (cart.vue = /cart page)
+├── components/      # Vue components (cart/ = line item, empty state, summary)
 ├── composables/     # Shared composables (including Shopify)
 ├── assets/          # Static assets (CSS, fonts, images)
 ├── public/          # Files served as-is
