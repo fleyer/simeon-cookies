@@ -51,15 +51,6 @@ function toCartItem(product: CatalogProduct) {
   <div class="pt-[--ui-header-height] sm:pt-40">
     <!-- Reserved for the tag-based filter row (see specs/03-order.md, Filtering) -->
     <div class="h-12" />
-
-    <!--
-      Product data is only ever fetched client-side (see useProducts: server: false),
-      so the pending/error/empty/catalog branch taken on the server (always "pending",
-      since the fetch never runs during prerender) can differ from the branch the
-      client resolves to on its very first render. ClientOnly renders the same
-      fallback on both server and pre-mount client, then swaps to the real content
-      after mount, outside of hydration diffing — avoiding the mismatch entirely.
-    -->
     <ClientOnly>
       <!-- Error -->
       <div
