@@ -55,13 +55,14 @@ const cardUi = computed(() => ({
         v-else
         class="relative aspect-square w-full min-w-0 overflow-hidden flex items-center justify-center"
       >
-        <NuxtImg
+        <UiImageWithSkeleton
           :src="image"
           :alt="imageAlt ?? title"
           :provider="image?.startsWith('http') ? 'shopify' : undefined"
           format="webp"
           :width="600"
-          class="w-full h-full object-cover object-center transition-transform duration-[400ms] ease-out group-hover/card:scale-[1.03]"
+          wrapper-class="w-full h-full"
+          class="object-cover object-center duration-[400ms] ease-out group-hover/card:scale-[1.03]"
           :style="isSoldout ? { filter: 'brightness(0.75) grayscale(30%)' } : undefined"
         />
         <UBadge

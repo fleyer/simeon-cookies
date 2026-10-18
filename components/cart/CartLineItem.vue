@@ -27,13 +27,14 @@ function remove() {
     data-testid="cart-line-item"
     :data-item-id="item.id"
   >
-    <NuxtImg
+    <UiImageWithSkeleton
       :src="item.image"
       :alt="item.imageAlt"
       :provider="item.image?.startsWith('http') ? 'shopify' : undefined"
       format="webp"
       :width="144"
-      class="size-[72px] shrink-0 rounded object-cover"
+      wrapper-class="size-[72px] shrink-0 rounded overflow-hidden"
+      class="object-cover"
     />
 
     <div class="flex-1 min-w-0 flex flex-col gap-1">
