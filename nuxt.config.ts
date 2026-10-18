@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxt/image', '@pinia/nuxt'],
+  modules: ['@nuxt/ui', '@nuxt/image', '@pinia/nuxt', '@vueuse/motion/nuxt'],
   css: ['~/assets/css/main.css'],
 
   app: {
@@ -53,6 +53,25 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      motion: {
+        directives:{
+          pop: {
+            initial:{
+              scale: .95,
+              opacity: 0,
+
+            },
+
+            visible: {
+              scale: 1,
+              opacity: 1,
+              transition: {
+                duration: 500
+              }
+            }
+          }
+        }
+      },
       shopifyStoreDomain: process.env.NUXT_PUBLIC_SHOPIFY_STORE_DOMAIN ?? 'mock.shop',
       shopifyStorefrontToken: process.env.NUXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN ?? 'mock-token',
       shopifyApiVersion: '2026-04',

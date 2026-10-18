@@ -3,6 +3,7 @@ defineProps<{ height?: string }>()
 </script>
 <template>
   <NuxtImg 
+    v-motion-pop
     src="/Simeon-Hero.png" 
     format="webp"
     :height="400"
