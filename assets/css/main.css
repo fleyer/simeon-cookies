@@ -43,6 +43,13 @@
 
 }
 
+/* Mobile: below Tailwind's `sm` breakpoint (40rem) */
+@media (width < 40rem) {
+  :root {
+    --ui-bg: white;
+  }
+}
+
 @layer base {
 
   button,

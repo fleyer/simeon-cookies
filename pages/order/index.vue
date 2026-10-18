@@ -82,14 +82,14 @@ function toCartItem(product: CatalogProduct) {
       <!-- Catalog grid -->
       <UPageGrid
         v-else-if="!pending"
-        class="w-full"
+        class="w-full gap-0 md:gap-8"
       >
         <ProductCard
           v-for="product in products"
           :key="product.id"
           v-bind="toCardProps(product)"
           :price="resolvedVariant(product)?.price ?? product.price"
-          class="rounded-sm col-span-1 bg-white hover:bg-white"
+          class="sm:rounded-sm col-span-1 bg-white hover:bg-white outline-none ring-0 sm:ring-1 border-t-1 border-t-gray-200"
           :as="UPageCard"
         >
           <template #footer>
@@ -116,7 +116,7 @@ function toCartItem(product: CatalogProduct) {
       <!-- Loading (also used as the ClientOnly fallback, so SSR/pre-mount markup matches) -->
       <UPageGrid
         v-else
-        class="w-full"
+        class="w-full gap-0 md:gap-8"
       >
         <ProductCard
           v-for="i in 6"
@@ -128,7 +128,7 @@ function toCartItem(product: CatalogProduct) {
       </UPageGrid>
 
       <template #fallback>
-        <UPageGrid class="w-full">
+        <UPageGrid class="w-full gap-0 md:gap-8">
           <ProductCard
             v-for="i in 6"
             :key="i"

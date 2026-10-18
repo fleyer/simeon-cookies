@@ -31,7 +31,7 @@ const cardUi = computed(() => ({
     'min-w-0 w-full overflow-hidden rounded-none',
     props.status === 'featured' ? 'ring-2 ring-peach-300' : '',
   ].join(' '),
-  container: 'min-w-0 w-full p-0 sm:p-0 gap-0',
+  container: 'min-w-0 w-full p-0 sm:p-0 pb-4 md:pb-0 gap-0',
   wrapper: 'min-w-0 w-full items-stretch',
   header: 'min-w-0 w-full p-0 px-0 sm:px-0',
   body: 'pt-3',
