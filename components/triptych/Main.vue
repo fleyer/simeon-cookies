@@ -25,7 +25,7 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
         src="/cookies/hero/cookies-landing.png"
         alt="Cookie signature Simeon"
         format="webp"
-        sizes="100vw md:33vw"
+        sizes="xs:100vw md:33vw"
         loading="eager"
         class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover/panel:scale-[1.02]"
       />

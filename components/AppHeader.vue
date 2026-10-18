@@ -55,6 +55,7 @@ const navItems = computed(() => [
         >
           <NuxtImg
             src="/Simeon.png"
+            alt="Simeon Cookies"
             width="40"
             height="40"
             class="h-10 w-auto"
