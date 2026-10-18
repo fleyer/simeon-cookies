@@ -38,6 +38,12 @@ export default defineNuxtConfig({
     colorMode: false
   },
 
+  image: {
+    // Registers the Shopify CDN provider (adds ?width=&format= to remote
+    // product images). Local images keep using the default IPX provider.
+    shopify: { baseURL: 'https://cdn.shopify.com' },
+  },
+
   nitro: {
     preset: 'static',
     prerender: {

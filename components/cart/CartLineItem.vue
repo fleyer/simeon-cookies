@@ -30,6 +30,9 @@ function remove() {
     <NuxtImg
       :src="item.image"
       :alt="item.imageAlt"
+      :provider="item.image?.startsWith('http') ? 'shopify' : undefined"
+      format="webp"
+      :width="144"
       class="size-[72px] shrink-0 rounded object-cover"
     />
 
