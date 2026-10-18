@@ -11,6 +11,7 @@ const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
       <div class="flex items-center justify-center gap-0 md:gap-10 px-0 md:px-12 pb-0 md:pb-8 md:pb-12 flex-1 min-h-0">
         <TriptychSide
           to="/order"
+          class="rounded-sm"
           :image="hero.left.imageSrc"
           :title="hero.left.title"
           :cta="hero.left.cta"
@@ -20,6 +21,7 @@ const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
           @mouseleave="hoverLeave(0)"
         />
         <TriptychMain
+          class="rounded-sm"
           :active="isActive(1)"
           :progress="progressFor(1)"
           @mouseenter="hoverEnter(1)"
@@ -34,6 +36,7 @@ const { isActive, progressFor, hoverEnter, hoverLeave } = useTriptychAutoplay()
         </TriptychMain>
         <TriptychSide
           to="/#event"
+          class="rounded-sm"
           :image="hero.right.imageSrc"
           :title="hero.right.title"
           :cta="hero.right.cta"

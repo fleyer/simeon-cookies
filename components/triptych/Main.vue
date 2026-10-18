@@ -11,16 +11,16 @@ const logoOpacity = computed(() => Math.max(1 - scrollY.value / 100, 0))
 <template>
   <NuxtLink
     to="/#featured"
-    class="group/panel relative aspect-auto md:aspect-[9/19] h-full max-h-full cursor-pointer"
+    class="group/panel relative aspect-auto md:aspect-[10/19] h-full max-h-full cursor-pointer overflow-hidden"
   >
     <div
       class="absolute w-[70%] md:w-[80%] h-[460px] md:h-[320px] z-10 pt-40 md:pt-10 left-1/2 -translate-x-1/2 flex justify-center items-center overflow-hidden"
       :style="{ opacity: logoOpacity }"
     >
-      <HeroLogo />
+      <HeroLogo class="rounded-sm" />
     </div>
 
-    <div class="h-full w-full aspect-auto sm:aspect=[9/19] overflow-hidden">
+    <div class="h-full w-full md:absolute md:inset-0">
       <NuxtImg
         src="/cookies/hero/cookies-landing.png"
         alt="Cookie signature Simeon"
